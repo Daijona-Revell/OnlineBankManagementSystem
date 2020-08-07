@@ -11,7 +11,7 @@ public class Main {
                 "2.View Account by Account Number \n" +
                 "3.Withdraw from Account \n" +
                 "4.Deposit from Account");
-        // scanner.next();
+        // scanner.next(); //git
 
         switch (scanner.nextInt()) {
             case 1:
