@@ -1,5 +1,7 @@
 package com.codeintelx.bank.services;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class AccountServices
@@ -11,6 +13,18 @@ public class AccountServices
     {
         this.balance = balance;
     }
+
+
+
+//    public String customerAccountCreation (String customerName)
+//    {
+//        while(customerName == null)
+//        {
+//            Map <String, String> customer = new HashMap<>();
+//            customer.put("", "");
+//        }
+//        return customerName;
+//    }
 
     //Deposit amount
 

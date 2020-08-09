@@ -1,14 +1,22 @@
 package com.codeintelx.bank.models;
 
-public class Account
-{
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Account {
+    ArrayList<String> customer = new ArrayList<String>();
+    ArrayList<String> account = new ArrayList<String>();
     private String accountNumber;
     private double balance;
     private String customerName;
     private String typeOfAccount;
 
-    public Account(String accountNumber, double balance, String customerName, String typeOfAccount)
-    {
+    public Account(String customerName) {
+        this.customerName = customerName;
+    }
+
+    public Account(String accountNumber, double balance, String customerName, String typeOfAccount) {
         this.accountNumber = accountNumber;
         this.balance = balance;
         this.customerName = customerName;
@@ -49,10 +57,21 @@ public class Account
 
     //Name
 
+    public void customerAccountCreation(String customerName) {
+        if (customerName == null) {
+//            Map<String, String> customer = new HashMap<>();
+//            customer.put("", "");
 
+//            for(Map.Entry<String,String> entry : customer.entrySet()){
+//                System.out.println("Current citizen in set: "
+//                        + entry.getKey() + ": " +entry.getValue());
+//                if(entry.getValue().equals(customer)){
+//                    System.out.println(entry.getKey());
+        }
+
+    }
 
     //Type of Account
-
 
 
     //Account customer name and account ID

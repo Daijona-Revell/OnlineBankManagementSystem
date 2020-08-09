@@ -3,6 +3,9 @@ package com.codeintelx.bank;
 import com.codeintelx.bank.models.Account;
 import com.codeintelx.bank.services.AccountServices;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Main {
@@ -20,9 +23,13 @@ public class Main {
             case 1:
                 //Account account = new Account(scanner.nextLine(), scanner.nextInt(), scanner.nextLine(), scanner.nextLine());
                 System.out.println("Account will be created");
-                scanner.nextLine();
+               // AccountServices accountServices2 = new AccountServices(scanner.nextInt());
+                //scanner.nextLine();
                 System.out.println("Please enter your name");
-                Account account = new Account(scanner.nextLine(), scanner.nextInt(), scanner.nextLine(), scanner.nextLine());
+                Account account = new Account(scanner.nextLine());
+                ArrayList<String> customerName = new ArrayList<String>();
+                customerName.add(scanner.nextLine());
+                account.customerAccountCreation(scanner.nextLine());
 
                 break;
             case 2:
