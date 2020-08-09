@@ -1,5 +1,8 @@
 package com.codeintelx.bank;
 
+import com.codeintelx.bank.models.Account;
+import com.codeintelx.bank.services.AccountServices;
+
 import java.util.Scanner;
 
 public class Main {
@@ -15,21 +18,29 @@ public class Main {
 
         switch (scanner.nextInt()) {
             case 1:
+                //Account account = new Account(scanner.nextLine(), scanner.nextInt(), scanner.nextLine(), scanner.nextLine());
                 System.out.println("Account will be created");
+                scanner.nextLine();
                 System.out.println("Please enter your name");
-                scanner.hasNext();
+                Account account = new Account(scanner.nextLine(), scanner.nextInt(), scanner.nextLine(), scanner.nextLine());
+
                 break;
             case 2:
                 System.out.println("Please enter your account number");
                 scanner.hasNext();
                 break;
             case 3:
+                System.out.println("Please enter balance");
+                AccountServices accountServices = new AccountServices(scanner.nextInt());
                 System.out.println("How much do you want to withdraw from your account?");
-                scanner.hasNext();
+                //AccountServices accountServices = new AccountServices(scanner.nextInt());
+                accountServices.withdrawFunds(scanner.nextInt());
                 break;
             default:
+                System.out.println("Please enter balance");
+                AccountServices accountServices1 = new AccountServices(scanner.nextInt());
                 System.out.println("How much do you want to deposit into your account?");
-                scanner.hasNext();
+                accountServices1.depositFunds(scanner.nextInt());
 
 
         }
