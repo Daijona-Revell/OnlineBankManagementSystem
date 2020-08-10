@@ -10,40 +10,8 @@ public class Account {
     private String customerName;
     private String typeOfAccount;
 
-    Scanner scanner = new Scanner(System.in);
-
-//    public Account() {
-//        this("Default", 0.00, "Default Name", "Default Address");
-//
-//        this.customerName = customerName;
-//    }
-
-
-
-    public Account(double balance, String customerName, String typeOfAccount) {
-        this.balance = balance;
-        this.customerName = customerName;
-        this.typeOfAccount = typeOfAccount;
-    }
-
-    public Account(String customerName) {
-        this.customerName = customerName;
-    }
-
-    public Account(String accountNumber, String customerName) {
-        this.accountNumber = accountNumber;
-        this.customerName = customerName;
-    }
-
-    public Account(String accountNumber, double balance, String customerName, String typeOfAccount) {
-        this.accountNumber = accountNumber;
-        this.balance = balance;
-        this.customerName = customerName;
-        this.typeOfAccount = typeOfAccount;
-    }
 
     public String getAccountNumber() {
-
         return accountNumber;
     }
 
@@ -75,16 +43,82 @@ public class Account {
         this.typeOfAccount = typeOfAccount;
     }
 
-    //Name
+
+    //Scanner scanner = new Scanner(System.in);
+
+//    public Account() {
+//        this("Default", 0.00, "Default Name", "Default Address");
+//
+//        this.customerName = customerName;
+//    }
 
 
 
-    public static Account createAccount (Double balance, String customerName, String typeOfAccount)
-    {
-        return new Account( balance, customerName, typeOfAccount);
-    }
-
-        }
+//    public Account(double balance, String customerName, String typeOfAccount) {
+//        this.balance = balance;
+//        this.customerName = customerName;
+//        this.typeOfAccount = typeOfAccount;
+//    }
+//
+//    public Account(String customerName) {
+//        this.customerName = customerName;
+//    }
+//
+//    public Account(String accountNumber, String customerName) {
+//        this.accountNumber = accountNumber;
+//        this.customerName = customerName;
+//    }
+//
+//    public Account(String accountNumber, double balance, String customerName, String typeOfAccount) {
+//        this.accountNumber = accountNumber;
+//        this.balance = balance;
+//        this.customerName = customerName;
+//        this.typeOfAccount = typeOfAccount;
+//    }
+//
+//    public String getAccountNumber() {
+//
+//        return accountNumber;
+//    }
+//
+//    public void setAccountNumber(String accountNumber) {
+//        this.accountNumber = accountNumber;
+//    }
+//
+//    public double getBalance() {
+//        return balance;
+//    }
+//
+//    public void setBalance(double balance) {
+//        this.balance = balance;
+//    }
+//
+//    public String getCustomerName() {
+//        return customerName;
+//    }
+//
+//    public void setCustomerName(String customerName) {
+//        this.customerName = customerName;
+//    }
+//
+//    public String getTypeOfAccount() {
+//        return typeOfAccount;
+//    }
+//
+//    public void setTypeOfAccount(String typeOfAccount) {
+//        this.typeOfAccount = typeOfAccount;
+//    }
+//
+//    //Name
+//
+//
+//
+//    public static Account createAccount (String accountNumber, double balance, String customerName, String typeOfAccount)
+//    {
+//        return new Account( accountNumber, 0.00, customerName, typeOfAccount);
+//    }
+//
+//        }
 
 //        ArrayList<String> customer = new ArrayList<String>();
 //        if (customerName == null) {
@@ -122,6 +156,6 @@ public class Account {
 ////
 ////        String account = customerName.get(scanner.nextDouble());
 ////        System.out.println(account);
-//    }
+    }
 
 
