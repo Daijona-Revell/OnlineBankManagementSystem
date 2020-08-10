@@ -1,18 +1,37 @@
 package com.codeintelx.bank.models;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class Account {
-    ArrayList<String> customer = new ArrayList<String>();
-    ArrayList<String> account = new ArrayList<String>();
+
+   // ArrayList<String> account = new ArrayList<String>();
     private String accountNumber;
     private double balance;
     private String customerName;
     private String typeOfAccount;
 
+    Scanner scanner = new Scanner(System.in);
+
+//    public Account() {
+//        this("Default", 0.00, "Default Name", "Default Address");
+//
+//        this.customerName = customerName;
+//    }
+
+
+
+    public Account(double balance, String customerName, String typeOfAccount) {
+        this.balance = balance;
+        this.customerName = customerName;
+        this.typeOfAccount = typeOfAccount;
+    }
+
     public Account(String customerName) {
+        this.customerName = customerName;
+    }
+
+    public Account(String accountNumber, String customerName) {
+        this.accountNumber = accountNumber;
         this.customerName = customerName;
     }
 
@@ -24,6 +43,7 @@ public class Account {
     }
 
     public String getAccountNumber() {
+
         return accountNumber;
     }
 
@@ -57,8 +77,18 @@ public class Account {
 
     //Name
 
-    public void customerAccountCreation(String customerName) {
-        if (customerName == null) {
+
+
+    public static Account createAccount (Double balance, String customerName, String typeOfAccount)
+    {
+        return new Account( balance, customerName, typeOfAccount);
+    }
+
+        }
+
+//        ArrayList<String> customer = new ArrayList<String>();
+//        if (customerName == null) {
+//            customer.add("");
 //            Map<String, String> customer = new HashMap<>();
 //            customer.put("", "");
 
@@ -67,13 +97,31 @@ public class Account {
 //                        + entry.getKey() + ": " +entry.getValue());
 //                if(entry.getValue().equals(customer)){
 //                    System.out.println(entry.getKey());
-        }
 
-    }
+
+
 
     //Type of Account
 
 
     //Account customer name and account ID
 
-}
+
+
+
+
+//    public  static void accountNumber ()
+//    {
+////        Map<Double,String> customerName = new HashMap<>();
+////        System.out.println("Account Will be created \n"+
+////                "Please enter your name:");
+////        //scanner.nextLine();
+////        //System.out.println("Account Will be created");
+////        customerName.put(Math.random(), scanner.nextLine());
+////        System.out.println(customerName.toString());
+////
+////        String account = customerName.get(scanner.nextDouble());
+////        System.out.println(account);
+//    }
+
+

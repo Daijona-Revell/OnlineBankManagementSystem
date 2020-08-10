@@ -3,14 +3,14 @@ package com.codeintelx.bank;
 import com.codeintelx.bank.models.Account;
 import com.codeintelx.bank.services.AccountServices;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
+    public static AccountServices accountServices = new AccountServices("Customer");
+    public static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
+        //AccountServices accountServices = new AccountServices()
         Scanner scanner = new Scanner(System.in);
         System.out.println("Please enter choice");
         System.out.println("1.Create an Account \n" +
@@ -19,22 +19,41 @@ public class Main {
                 "4.Deposit from Account");
         // scanner.next(); //git
 
-        switch (scanner.nextInt()) {
+        switch (scanner.nextInt())
+        {
             case 1:
+                //System.out.println("Please enter your name");
+                //boolean customerAccount = AccountServices.addNewCustomer();
+                //account.customerAccountCreation();
                 //Account account = new Account(scanner.nextLine(), scanner.nextInt(), scanner.nextLine(), scanner.nextLine());
-                System.out.println("Account will be created");
-               // AccountServices accountServices2 = new AccountServices(scanner.nextInt());
-                //scanner.nextLine();
-                System.out.println("Please enter your name");
-                Account account = new Account(scanner.nextLine());
-                ArrayList<String> customerName = new ArrayList<String>();
-                customerName.add(scanner.nextLine());
-                account.customerAccountCreation(scanner.nextLine());
+//                ArrayList<String> customerName = new ArrayList<String>();
+//                    System.out.println("Account will be created");
+//                    scanner.nextLine();
+//                    System.out.println("Please enter your name");
+//                    customerName.add(scanner.nextLine());
+//                    System.out.println(customerName.toString());
+                         createNewCustomer();
+                    break;
 
-                break;
+
+                    //System.out.println("Account will be created");
+                    // Account account = new Account(scanner.nextLine());
+                    //Account account = new Account();
+                    //scanner.nextLine();
+                    //System.out.println("Please enter your name");
+                    //Account account = new Account(scanner.nextLine());
+                    //ArrayList<String> customerName = new ArrayList<String>();
+                    //customerName.add(scanner.nextLine());
+                    //account.customerAccountCreation(scanner.nextLine());
+                    //account.setCustomerName(scanner.nextLine());
+
+
+
             case 2:
-                System.out.println("Please enter your account number");
-                scanner.hasNext();
+//                Account account1 = new Account();
+//                account1.accountNumber();
+                accountServices.linkAccountNumber();
+
                 break;
             case 3:
                 System.out.println("Please enter balance");
@@ -51,6 +70,39 @@ public class Main {
 
 
         }
+
+
+
+
+
+
+
+
+
     }
+
+    public static void createNewCustomer()
+    {
+        System.out.println("Enter name: ");
+        String name = scanner.nextLine();
+        System.out.println("Which account would you like to access? ");
+        String type = scanner.nextLine();
+        Account newCustomer = Account.createAccount(0.00, name, type);
+        //AccountServices accountService;
+        if(accountServices.addNewAccount(newCustomer))
+        {
+            System.out.println("New customer added: name = " + name + ", type = "+ type);
+        } else {
+            System.out.println("Cannot add, " + name + " already on file");
+        }
+        accountServices.printCustomers();
+    }
+
+
+
+
+
+
+
 }
 
