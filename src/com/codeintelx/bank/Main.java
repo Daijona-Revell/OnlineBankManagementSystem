@@ -6,7 +6,7 @@ import com.codeintelx.bank.services.AccountServices;
 import java.util.*;
 
 public class Main {
-    public static AccountServices accountServices = new AccountServices("");
+    public static AccountServices accountServices = new AccountServices(0.00);
     Account account = new Account();
 
     public static Scanner scanner = new Scanner(System.in);
@@ -43,7 +43,16 @@ public class Main {
 //                    customerName.add(scanner.nextLine());
 //                    System.out.println(customerName.toString());
 //                    somethingElse();
+                    //createAccount();
+//                    System.out.println("Enter name: ");
+//                    name = scanner.nextLine();
+//                    //accountServices. createAccount(name, type);
+//                    System.out.println("Which account would you like to access? ");
+//                    type = scanner.nextLine();
+//                    accountServices. createAccount(name, type);
                     createAccount();
+
+
                     break;
 
 
@@ -63,7 +72,7 @@ public class Main {
 //                Account account1 = new Account();
 //                account1.accountNumber();
                     System.out.println("Please enter account number");
-                 accountServices.viewAccount(scanner.next());
+                 accountServices.viewAccount(scanner.nextDouble());
 
                     break;
                 case 3:
@@ -96,46 +105,101 @@ public class Main {
 
     }
 
-
-
-    public static void createAccount()
+    public static Account createAccount()
     {
-        ArrayList<String> account = new ArrayList<>();
+        // ArrayList<String> account = new ArrayList<>();
+        // ArrayList<Account> account = new ArrayList<>();
         System.out.println("Enter name: ");
-        String name = scanner.nextLine();
-        account.add(name);
+         String name = scanner.nextLine();
+       // account.add(name);
         System.out.println("Which account would you like to access? ");
         String type = scanner.nextLine();
-        account.add(type);
+        //account.add(type);
+        Double accountNumber = Math.random();
 
         if(type.equals("Checking"))
         {
             System.out.println("Checking account number:");
-            Double accountNumber = Math.random();
-            account.add(accountNumber.toString());
+            //Double accountNumber = Math.random();
+            //account.add(accountNumber);
             System.out.println("New customer added: name = " + name + ", type = "+ type + ", account number: " + accountNumber );
-            System.out.println(account);
+           // System.out.println(account);
 
-           // Account newCustomer = Account.createAccount("" , 0.00, name, type);
+            // Account newCustomer = Account.createAccount("" , 0.00, name, type);
             //bankCustomers.add(newCustomer);
         }
         else if (type.equals("Savings"))
         {
             System.out.println("Saving account number:");
-            Double accountNumber = Math.random();
-            account.add(accountNumber.toString());
+            //Double accountNumber = Math.random();
+            //account.add(accountNumber);
             System.out.println("New customer added: name = " + name + ", type = "+ type + ", account number: " + accountNumber );
-            System.out.println(account);
-           // Account newCustomer = Account.createAccount("" , 0.00, name, type);
+            //System.out.println(account);
+            // Account newCustomer = Account.createAccount("" , 0.00, name, type);
             //account.add(newCustomer);
             //account.add(accountNumber);
         }
         else
         {
-            System.out.println(account);
+            System.out.println("We trying");
+            //System.out.println(account);
         }
+        accountServices.createAccount(name, type, accountNumber);
+        return null;
 
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+//    public static void createAccount()
+//    {
+//       // ArrayList<String> account = new ArrayList<>();
+//        ArrayList<String> account = new ArrayList<>();
+//        System.out.println("Enter name: ");
+//        String name = scanner.nextLine();
+//        account.add(name);
+//        System.out.println("Which account would you like to access? ");
+//        String type = scanner.nextLine();
+//        account.add(type);
+//
+//        if(type.equals("Checking"))
+//        {
+//            System.out.println("Checking account number:");
+//            Double accountNumber = Math.random();
+//            account.add(accountNumber.toString());
+//            System.out.println("New customer added: name = " + name + ", type = "+ type + ", account number: " + accountNumber );
+//            System.out.println(account);
+//
+//           // Account newCustomer = Account.createAccount("" , 0.00, name, type);
+//            //bankCustomers.add(newCustomer);
+//        }
+//        else if (type.equals("Savings"))
+//        {
+//            System.out.println("Saving account number:");
+//            Double accountNumber = Math.random();
+//            account.add(accountNumber.toString());
+//            System.out.println("New customer added: name = " + name + ", type = "+ type + ", account number: " + accountNumber );
+//            System.out.println(account);
+//           // Account newCustomer = Account.createAccount("" , 0.00, name, type);
+//            //account.add(newCustomer);
+//            //account.add(accountNumber);
+//        }
+//        else
+//        {
+//            System.out.println(account);
+//        }
+//
+//    }
 
 //    public static void createNewCustomer()
 //    {

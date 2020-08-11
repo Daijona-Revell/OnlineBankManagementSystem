@@ -5,17 +5,28 @@ import java.util.*;
 public class Account {
 
    // ArrayList<String> account = new ArrayList<String>();
-    private String accountNumber;
+   //ArrayList<String> account = new ArrayList<>();
+    private Double accountNumber;
     private double balance;
     private String customerName;
     private String typeOfAccount;
 
+    public Account() {
+    }
 
-    public String getAccountNumber() {
+    public Account(String customerName, String typeOfAccount, Double accountNumber)
+    {
+        this.accountNumber = accountNumber;
+        this.customerName = customerName;
+        this.typeOfAccount = typeOfAccount;
+    }
+
+    public Double getAccountNumber() {
         return accountNumber;
     }
 
-    public void setAccountNumber(String accountNumber) {
+
+    public void setAccountNumber(Double accountNumber) {
         this.accountNumber = accountNumber;
     }
 

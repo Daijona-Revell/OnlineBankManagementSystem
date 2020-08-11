@@ -3,24 +3,36 @@ package com.codeintelx.bank.services;
 import com.codeintelx.bank.models.Account;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
 
 public class AccountServices {
+
+    //ArrayList<Main> account = new ArrayList<>();
+    ArrayList<Account> account = new ArrayList<>();
 
     //private static Scanner scanner = new Scanner(System.in);
 
     private static double balance;
-    private  String accountNumber;
+    private  Double accountNumber;
 
     private String myCustomers;
-    private ArrayList<Account> bankCustomers;
+    //private ArrayList<Account> bankCustomers;
 
 
-    public AccountServices(String accountNumber)
+    public AccountServices(Double accountNumber)
     {
         this.accountNumber = accountNumber;
+    }
+
+
+
+
+    public Account createAccount(String name, String type, Double accountNumber)
+    {
+        account.add(new Account(name, type, accountNumber));
+
+        System.out.println(account.get(0).getAccountNumber());
+
+        return null;
     }
 
 //    public AccountServices(String myCustomers) {
@@ -142,34 +154,116 @@ public class AccountServices {
 //                    this.bankCustomers.get(i).getCustomerName() + " -> " +
 //                    this.bankCustomers.get(i).getTypeOfAccount());
 //        }
-    public void viewAccount(String accountNumber)
-    {
 
-        for (int i = 0; i < account.size(); i++)
-            System.out.print(account.get(i) + " ");
-        System.out.println("Hello");
 
+//    public Account createAccount(Account name, Account type)
+//    {
+//        // ArrayList<String> account = new ArrayList<>();
+//       // ArrayList<Account> account = new ArrayList<>();
+//        //System.out.println("Enter name: ");
+//        //String name = scanner.nextLine();
+//        account.add(name);
+//        //System.out.println("Which account would you like to access? ");
+//       // String type = scanner.nextLine();
+//        account.add(type);
+//
+//        if(type.equals("Checking"))
+//        {
+//            System.out.println("Checking account number:");
+//            Account accountNumber = null;
+//            account.add(accountNumber);
+//            System.out.println("New customer added: name = " + name + ", type = "+ type + ", account number: " + accountNumber );
+//            System.out.println(account);
+//
+//            // Account newCustomer = Account.createAccount("" , 0.00, name, type);
+//            //bankCustomers.add(newCustomer);
+//        }
+//        else if (type.equals("Savings"))
+//        {
+//            System.out.println("Saving account number:");
+//            Account accountNumber = null;
+//            account.add(accountNumber);
+//            System.out.println("New customer added: name = " + name + ", type = "+ type + ", account number: " + accountNumber );
+//            System.out.println(account);
+//            // Account newCustomer = Account.createAccount("" , 0.00, name, type);
+//            //account.add(newCustomer);
+//            //account.add(accountNumber);
+//        }
+//        else
+//        {
+//            System.out.println(account);
+//        }
+//        return null;
+//
+//    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public Account viewAccount(Double accountNumber) {
+        int accountIndex;
+//        Map<String, String> customerAccount = new HashMap<>();
+//
+//        customerAccount.put(accountNumber, "");
+
+
+        //ArrayList<Main> account = new ArrayList<>();
+
+
+//        for (String str: account)
+//            customerAccount.put(str, str.toString());
+        for (int i = 0; i < account.size(); i++) {
+            if (account.get(i).getAccountNumber() == accountNumber)
+            {
+                System.out.println(account.get(0).getCustomerName());
+
+//
+//        }
+            }
+
+            System.out.println("Hello Person");
+            return null;
+
+        }
+        return null;
     }
 
 
-    public void depositFunds(double deposit) {
-        this.balance += deposit;
-        System.out.println(this.balance);
-
-    }
-
-    //Withdraw from amount
-
-    public void withdrawFunds(double withdraw) {
-        this.balance -= withdraw;
-        if (this.balance < 0) {
-            System.out.println("Insufficient Funds");
-
-        } else {
+        public double depositFunds(double deposit){
+            this.balance += deposit;
             System.out.println(this.balance);
+
+            return 0;
+
         }
 
-    }
+        //Withdraw from amount
+
+        public double withdrawFunds ( double withdraw){
+            this.balance -= withdraw;
+            if (this.balance < 0) {
+                System.out.println("Insufficient Funds");
+
+            } else {
+                System.out.println(this.balance);
+            }
+            return 0;
+
+        }
 
 
 //    public void linkAccountNumber() {
@@ -183,8 +277,6 @@ public class AccountServices {
 
 
 //    }
-
-
 
 
 //    public String queryCustomer(Account account) {
@@ -224,12 +316,8 @@ public class AccountServices {
 //            }
 
 
-
-
-
-
-
     }
+
 
 
 
