@@ -40,6 +40,8 @@ public class AccountServices {
 
             System.out.println(account.get(i).getAccountNumber());
 
+            System.out.println(account.get(i).getBalance());
+
         }
         return null;
     }
@@ -192,6 +194,9 @@ public class AccountServices {
 //        for (String str: account)
 //            customerAccount.put(str, str.toString());
 //        System.out.println(account.size());
+
+
+
         for (int i = 0; i < account.size(); i++) {
 //            if (account.get(i).getAccountNumber() == accountNumber)
 //            {
@@ -210,9 +215,13 @@ public class AccountServices {
            // System.out.println("we in the view account class");
             if (accountNumberFromUser.equals(account.get(i).getAccountNumber())) {
                 accountIndex = i;
-                System.out.println(account.get(accountIndex).getCustomerName());
+                System.out.println("Customer Name: " + account.get(accountIndex).getCustomerName());
+                System.out.println("Type of Account: " + account.get(accountIndex).getTypeOfAccount());
+                System.out.println("Account Number: " + account.get(accountIndex).getAccountNumber());
+                System.out.println("Balance: " + account.get(accountIndex).getBalance());
                 // System.out.println(account);
                 //return (true);
+
                 System.out.println("we in the view account class");
                 break;
             }
@@ -228,27 +237,76 @@ public class AccountServices {
        return null;
     }
 
-        public double depositFunds(double deposit){
-            this.balance += deposit;
-            System.out.println(this.balance);
+        public double depositFunds(Double accountNumber, double deposit)
+        {
+        //viewAccount(accountNumber);
 
+            for (int i = 0; i < account.size(); i++) {
+//
+                if (accountNumber.equals(account.get(i).getAccountNumber())) {
+                    int accountIndex = i;
+                    System.out.println("Name: " + account.get(accountIndex).getCustomerName());
+                    System.out.println("Balance: " + account.get(accountIndex).getBalance() + deposit);
+                    // System.out.println(account);
+                    //return (true);
+
+                    System.out.println("we in the deposit account class");
+                    break;
+
+
+
+
+
+
+//            this.balance += deposit;
+//            System.out.println(this.balance);
+
+//            return 0;
+
+        }}
             return 0;
-
         }
 
         //Withdraw from amount
 
-        public double withdrawFunds ( double withdraw){
-            this.balance -= withdraw;
-            if (this.balance < 0) {
-                System.out.println("Insufficient Funds");
+        public double withdrawFunds ( Double accountNum, double withdraw) {
 
-            } else {
-                System.out.println(this.balance);
+            for (int i = 0; i < account.size(); i++) {
+//
+                if (accountNum.equals(account.get(i).getAccountNumber())) {
+                    int accountIndex = i;
+                    System.out.println("Name: " + account.get(accountIndex).getCustomerName());
+                   double newBalance = (account.get(accountIndex).getBalance() - withdraw);
+                   if(newBalance>0)
+                   {
+                       System.out.println("Balance " + newBalance);
+                   }
+                   else
+                   {
+                       System.out.println("Insufficient Funds");
+                   }
+                    // System.out.println(account);
+                    //return (true);
+
+                    System.out.println("we in the withdraw account class");
+                    break;
+
+
+//            this.balance -= withdraw;
+//            if (this.balance < 0) {
+//                System.out.println("Insufficient Funds");
+//
+//            } else {
+//                System.out.println(this.balance);
+//            }
+//            return 0;
+
+                }
             }
             return 0;
-
         }
+}
+
 
 
 //    public void linkAccountNumber() {
@@ -301,7 +359,7 @@ public class AccountServices {
 //            }
 
 
-    }
+
 
 
 

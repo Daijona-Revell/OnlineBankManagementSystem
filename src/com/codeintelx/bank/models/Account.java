@@ -19,6 +19,7 @@ public class Account {
         this.accountNumber = accountNumber;
         this.customerName = customerName;
         this.typeOfAccount = typeOfAccount;
+        this.balance = balance;
     }
 
     public double getAccountNumber() {

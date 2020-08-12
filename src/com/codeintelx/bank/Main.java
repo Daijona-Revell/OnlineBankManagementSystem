@@ -82,13 +82,21 @@ public class Main {
 //                    AccountServices accountServices = new AccountServices(scanner.next());
 //                    System.out.println("How much do you want to withdraw from your account?");
 //                    //AccountServices accountServices = new AccountServices(scanner.nextInt());
-//                    accountServices.withdrawFunds(scanner.nextInt());
+                    System.out.println("Please enter Account Number");
+                    double accountNum = scanner.nextDouble();
+                    System.out.println("How much do you want to take out?");
+                    int withdraw = scanner.nextInt();
+                    accountServices.withdrawFunds(accountNum , withdraw);
 //                    break;
                 case 4:
 //                    System.out.println("Please enter name or Account Number");
 //                    AccountServices accountServices1 = new AccountServices(scanner.next());
 //                    System.out.println("How much do you want to deposit into your account?");
-//                    accountServices1.depositFunds(scanner.nextInt());
+                    System.out.println("Please enter Account Number");
+                     double accountNumber = scanner.nextDouble();
+                    System.out.println("How much do you want to deposit?");
+                    int deposit = scanner.nextInt();
+                    accountServices.depositFunds(accountNumber,deposit);
 //                    break;
                 default:
                     System.out.println("Please enter another choice");
@@ -113,11 +121,12 @@ public class Main {
         //account.add(type);
         double accountNumber = Math.random();
 
+
         if(type.equals("Checking"))
         {
             System.out.println("Checking account number:");
             //Double accountNumber = Math.random();
-            System.out.println("How Much money will you input?");
+           System.out.println("How Much money will you input?");
             double balance = scanner.nextDouble();
             //account.add(accountNumber);
             System.out.println("New customer added: name = " + name + ", type = "+ type + ", account number: " + accountNumber + " balance: " + balance );
@@ -131,7 +140,7 @@ public class Main {
         {
             System.out.println("Saving account number:");
             //Double accountNumber = Math.random();
-            System.out.println("How Much money will you input?");
+           System.out.println("How Much money will you input?");
             double balance = scanner.nextDouble();
             //account.add(accountNumber);
             System.out.println("New customer added: name = " + name + ", type = "+ type + ", account number: " + accountNumber + " balance: " + balance );
