@@ -12,26 +12,35 @@ public class AccountServices {
     //private static Scanner scanner = new Scanner(System.in);
 
     private static double balance;
-    private  Double accountNumber;
+    private Double accountNumber;
+    private String name;
 
-    private String myCustomers;
+    //private String myCustomers;
     //private ArrayList<Account> bankCustomers;
 
 
-    public AccountServices(Double accountNumber)
-    {
+    public AccountServices(Double accountNumber) {
         this.accountNumber = accountNumber;
     }
 
+    public AccountServices() {
+    }
 
+    public AccountServices(double accountNumber, String name, String myCustomers) {
+        this.accountNumber = accountNumber;
+        this.name = name;
+        //this.myCustomers = myCustomers;
+    }
 
+    public Account createAccount(String name, String type, double accountNumber, double balance) {
+        account.add(new Account(name, type, accountNumber, balance));
 
-    public Account createAccount(String name, String type, Double accountNumber)
-    {
-        account.add(new Account(name, type, accountNumber));
+        for (int i = 0; i < account.size(); i++) {
+            System.out.println(account.get(i).getCustomerName());
 
-        System.out.println(account.get(0).getAccountNumber());
+            System.out.println(account.get(i).getAccountNumber());
 
+        }
         return null;
     }
 
@@ -39,14 +48,6 @@ public class AccountServices {
 //        this.myCustomers = myCustomers;
 //        this.bankCustomers = new ArrayList<Account>();
 //    }
-
-
-
-
-
-
-
-
 
 
 //Creates a new customer and adds them into bankCustomer List
@@ -76,25 +77,6 @@ public class AccountServices {
 //        }
 //        return -1;
 //    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 //
@@ -198,50 +180,53 @@ public class AccountServices {
 //    }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public Account viewAccount(Double accountNumber) {
+    public Account viewAccount(Double accountNumberFromUser) {
         int accountIndex;
 //        Map<String, String> customerAccount = new HashMap<>();
 //
 //        customerAccount.put(accountNumber, "");
-
 
         //ArrayList<Main> account = new ArrayList<>();
 
 
 //        for (String str: account)
 //            customerAccount.put(str, str.toString());
+//        System.out.println(account.size());
         for (int i = 0; i < account.size(); i++) {
-            if (account.get(i).getAccountNumber() == accountNumber)
-            {
-                System.out.println(account.get(0).getCustomerName());
+//            if (account.get(i).getAccountNumber() == accountNumber)
+//            {
+ //               accountIndex=i;
+//
+//                System.out.println(account.get(accountIndex).getCustomerName());
+//                break;
 
+
+//        boolean found = false;
+//        for (int i = 0; i < account.length; i++) {
+//            found = account.search(acn);
+//            if (found) {
+//                break;
+            //}
+           // System.out.println("we in the view account class");
+            if (accountNumberFromUser.equals(account.get(i).getAccountNumber())) {
+                accountIndex = i;
+                System.out.println(account.get(accountIndex).getCustomerName());
+                // System.out.println(account);
+                //return (true);
+                System.out.println("we in the view account class");
+                break;
+            }
+           // return null;
+        }
+//
+//
+
+//            System.out.println("Hello Person");
+//            return null;
 //
 //        }
-            }
-
-            System.out.println("Hello Person");
-            return null;
-
-        }
-        return null;
+       return null;
     }
-
 
         public double depositFunds(double deposit){
             this.balance += deposit;

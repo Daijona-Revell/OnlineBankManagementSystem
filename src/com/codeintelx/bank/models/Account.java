@@ -6,7 +6,7 @@ public class Account {
 
    // ArrayList<String> account = new ArrayList<String>();
    //ArrayList<String> account = new ArrayList<>();
-    private Double accountNumber;
+    private double accountNumber;
     private double balance;
     private String customerName;
     private String typeOfAccount;
@@ -14,14 +14,14 @@ public class Account {
     public Account() {
     }
 
-    public Account(String customerName, String typeOfAccount, Double accountNumber)
+    public Account(String customerName, String typeOfAccount, double accountNumber, double balance)
     {
         this.accountNumber = accountNumber;
         this.customerName = customerName;
         this.typeOfAccount = typeOfAccount;
     }
 
-    public Double getAccountNumber() {
+    public double getAccountNumber() {
         return accountNumber;
     }
 
