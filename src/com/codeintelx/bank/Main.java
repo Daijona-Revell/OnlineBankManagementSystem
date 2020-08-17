@@ -21,7 +21,7 @@ public class Main {
         boolean quit = false;
 
         while (!quit) {
-           // System.out.println("----------------------Welcome To Dai's Bank-----------------");
+            System.out.println("----------------------Welcome To Dai's Bank-----------------");
             String accountNumberFromUser;
 
             System.out.println("Please enter choice");
@@ -46,9 +46,17 @@ public class Main {
                 case 2:
 
                     System.out.println("Please enter Account number");
-                   accountNumberFromUser = scanner.next();
-
-                   accountServices.viewAccount(accountNumberFromUser);
+                    accountNumberFromUser = scanner.next();
+                    Account newAccount;
+                    while(accountServices.searchAccount(accountNumberFromUser) == null)
+                    {
+                        System.out.println("Account not found, Please enter a valid account number");
+                        accountNumberFromUser = scanner.next();
+                    }
+                    newAccount = accountServices.viewAccount(accountNumberFromUser);
+                    System.out.println("Customer: " + newAccount.getCustomerName());
+                    System.out.println("Type of Account: " + newAccount.getTypeOfAccount());
+                    System.out.println("Balance : " + newAccount.getBalance());
 
 
                     break;
@@ -94,15 +102,15 @@ public class Main {
 
     public static Account createAccount() {
 
-        System.out.println("Enter name: ");
+        System.out.println("Your account will be created, Please enter name: ");
         String name = scanner.nextLine();
 
-        System.out.println("Which account would you like to access? ");
+        System.out.println("Which account would you like to access? (Checking or Savings)");
         String type = scanner.next();
 
         if (type.equals("Checking")) {
-            System.out.println("Checking account number:");
-            System.out.println("How Much money will you input?");
+            System.out.println("Checking account created:");
+            System.out.println("How much money will you input?");
             long balance = scanner.nextLong();
 
             System.out.println("New customer added: ");
@@ -110,8 +118,8 @@ public class Main {
 
             //accountServices.createAccount(name, type, accountNumber, balance);
         } else if (type.equals("Savings")) {
-            System.out.println("Saving account number:");
-            System.out.println("How Much money will you input?");
+            System.out.println("Saving account created:");
+            System.out.println("How much money will you input?");
             long balance = scanner.nextLong();
             System.out.println("New customer added: ");
 
@@ -122,6 +130,13 @@ public class Main {
         }
         return null;
     }
+
+
+
+
+
+
+
 //
 //    public static void randomMethod(Account account){
 //        System.out.println(account.getBalance());
