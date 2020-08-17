@@ -1,24 +1,18 @@
 package com.codeintelx.bank.models;
 
-import java.util.*;
-
 public class Account
 {
 
-    private double accountNumber;
-    private double balance;
+    private int accountNumber;
+    private long balance;
     private String customerName;
     private String typeOfAccount;
 
     public Account()
     {
-        this.accountNumber = accountNumber;
-        this.customerName = customerName;
-        this.typeOfAccount = typeOfAccount;
-        this.balance = balance;
     }
 
-    public Account(String customerName, String typeOfAccount, double accountNumber, double balance)
+    public Account(String customerName, String typeOfAccount, long balance)
     {
         this.accountNumber = accountNumber;
         this.customerName = customerName;
@@ -26,23 +20,23 @@ public class Account
         this.balance = balance;
     }
 
-    public double getAccountNumber()
+    public int getAccountNumber()
     {
         return accountNumber;
     }
 
 
-    public void setAccountNumber(Double accountNumber)
+    public void setAccountNumber(int accountNumber)
     {
         this.accountNumber = accountNumber;
     }
 
-    public double getBalance()
+    public long getBalance()
     {
         return balance;
     }
 
-    public void setBalance(double balance)
+    public void setBalance(long balance)
     {
         this.balance = balance;
     }

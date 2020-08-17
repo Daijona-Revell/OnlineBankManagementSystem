@@ -2,39 +2,60 @@ package com.codeintelx.bank.services;
 
 import com.codeintelx.bank.models.Account;
 
-import java.util.ArrayList;
+import java.util.*;
 
 public class AccountServices {
+//    UUID uuid = UUID.randomUUID();
+//    String numericUUID = Long.toString(uuid.getMostSignificantBits())
+//            + Long.toString(uuid.getLeastSignificantBits());
+//    String ID = numericUUID.substring(0,10).replace("-", "10");
+//    //System.out.print(StringID);
 
-    ArrayList<Account> account = new ArrayList<>();
-
-    private static double balance;
-    private Double accountNumber;
-    private String name;
 
 
-//    public AccountServices(double accountNumber) {
-//        this.accountNumber = accountNumber;
-//    }
+
+    //private Random rand = new Random();
+
+   // private List<Account> accounts = new ArrayList<>();
+    private Map<String, Account> userAccounts = new HashMap<>();
+
 
     public AccountServices() {
-        this.accountNumber = accountNumber;
-        this.name = name;
-        this.balance = balance;
+
     }
 
     //Adds customer to account array list.
-    public Account createAccount(String name, String type, double accountNumber, double balance) {
-        account.add(new Account(name, type, accountNumber, balance));
+    public Account createAccount(String name, String type, long balance)
+    {
+        System.out.println("Create Account Class");
+        Account newAccount = new Account(name, type, balance);
+        UUID uuid = UUID.randomUUID();
+       // String numericUUID = Long.toString(uuid.getMostSignificantBits()) + Long.toString(uuid.getLeastSignificantBits());
+        String accountNumber = (Long.toString(UUID.randomUUID().getMostSignificantBits()).substring(1,11).replace("-", ""));
+        userAccounts.put(accountNumber, newAccount);
 
-            //Displays Customer name, Account Number, and Balance
-        for (int i = 0; i < account.size(); i++) {
-            System.out.println("Name: " + account.get(i).getCustomerName());
+        //Displays Customer name, Account Number, and Balance
+        System.out.println("Customer: " + userAccounts.get(accountNumber).getCustomerName());
+        System.out.println("Your new account number is " + accountNumber);
+        System.out.println("Your balance is: " + balance);
 
-            System.out.println("Account Number: " + account.get(i).getAccountNumber());
+        return newAccount;
+    }
 
-            System.out.println("Balance: " + account.get(i).getBalance());
 
+            //Search Map for key and returns the accountNumber
+
+    public Account searchAccount(String accountNumber)
+    {
+        System.out.println("Search Account method");
+
+        for (Map.Entry<String,Account> entry : userAccounts.entrySet())
+        {
+
+            if (userAccounts.containsKey(accountNumber) == true)
+            {
+                return userAccounts.get(accountNumber);
+            }
         }
         return null;
     }
@@ -42,91 +63,132 @@ public class AccountServices {
 
     //View Account input from the user
 
-    public Account viewAccount(double accountNumberFromUser) {
-        int accountIndex;
+    public Account viewAccount(String accountNumberFromUser)
+    {
 
-        for (int i = 0; i < account.size(); i++) {
+        System.out.println("we in the view account class");
 
-            if (accountNumberFromUser == (account.get(i).getAccountNumber())) {
-                accountIndex = i;
-                System.out.println("Customer Name: " + account.get(accountIndex).getCustomerName());
-                System.out.println("Type of Account: " + account.get(accountIndex).getTypeOfAccount());
-                System.out.println("Account Number: " + account.get(accountIndex).getAccountNumber());
-                System.out.println("Balance: " + account.get(accountIndex).getBalance());
-                // System.out.println(account);
-                //return (true);
+        Account newAccount;
+        newAccount = searchAccount(accountNumberFromUser);
 
-                //System.out.println("we in the view account class");
-               // break;
-            }
-
+        if (newAccount != null)
+        {
+            System.out.println(newAccount.getCustomerName());
+            System.out.println(newAccount.getBalance());
         }
 
-       return null;
+        return newAccount;
+
+
+
     }
 
-        public double depositFunds(double accountNumber, double deposit)
-        {
-        //viewAccount(accountNumber);
+            //Removes element from Map
+    public Account removeAccount(String accountNumberFromUser)
+    {
+    Account newAccount;
+    newAccount = searchAccount(accountNumberFromUser);
 
-            for (int i = 0; i < account.size(); i++) {
+
+    if(newAccount!= null)
+    {
+        System.out.println("Account will be removed: " + userAccounts.remove(accountNumberFromUser).getCustomerName());
+
+    }
+    return null;
+
+    }
+
+
+
+//        for (int i = 0; i < userAccounts.size(); i++) {
 //
-                if (accountNumber == (account.get(i).getAccountNumber()))
+//            if (userAccounts.containsKey(accountNumberFromUser) == true)
+//            {
+//
+//
+//                return userAccounts.get(accountNumberFromUser);
+//                //return userAccounts.get(accountNumberFromUser);
+
+
+//                result = accounts.get(i);
+//                accountIndex = i;
+//                System.out.println("Customer Name: " + userAccounts.getCustomerName());
+//                System.out.println("Type of Account: " + accounts.get(accountIndex).getTypeOfAccount());
+//                System.out.println("Account Number: " + accounts.get(accountIndex).getAccountNumber());
+//                System.out.println("Balance: " + accounts.get(accountIndex).getBalance());
+        // System.out.println(account);
+        //return (true);
+
+        //System.out.println("we in the view account class");
+        // break;
+//            }
+
+        //return null;
+
+
+//
+//
+        public long depositFunds(String accountNumberFromUser, long deposit)
+        {
+            Account newAccount;
+            newAccount = searchAccount(accountNumberFromUser);
+//
+                if (newAccount!= null)
                 {
-                    int accountIndex = i;
-                    System.out.println("Name: " + account.get(accountIndex).getCustomerName());
+                    //int accountIndex = i;
+                    System.out.println("Name: " + newAccount.getCustomerName());
                     //Adds deposit to balance
-                    deposit += account.get(accountIndex).getBalance() ;
+                    deposit += newAccount.getBalance() ;
                     //Sets new balance (deposit) in the index
-                    account.get(accountIndex).setBalance(deposit);
+                    userAccounts.get(accountNumberFromUser).setBalance(deposit);
                     //Sets new deposit amount
 
                     System.out.println( "Balance " + deposit);
 
-                   // System.out.println("we in the deposit account class");
-                    //break;
 
                  }
-
-            }
-
-            return 0;
+                return 0;
         }
 
-        //Withdraw from amount
-
-        public double withdrawFunds ( double accountNum, double withdraw)
+//
+//        //Withdraw from amount
+//
+        public long withdrawFunds ( String accountNumberFromUser, long withdraw)
         {
             //Finds person via account number
 
-            for (int i = 0; i < account.size(); i++) {
+            Account newAccount;
+            newAccount = searchAccount(accountNumberFromUser);
 //
-                if (accountNum == (account.get(i).getAccountNumber()))
+                if (newAccount!= null)
                 {
-                    int accountIndex = i;
-                    System.out.println("Name: " + account.get(accountIndex).getCustomerName());
+                    //int accountIndex = i;
+                    System.out.println("Name: " + newAccount.getCustomerName());
                     // Sets new Balance in newBalance
-                   double newBalance = (account.get(accountIndex).getBalance() - withdraw);
+                   long newBalance = (newAccount.getBalance() - withdraw);
                    //Sets new balance in the array list
-                    account.get(accountIndex).setBalance(newBalance);
                    if(newBalance>0)
                    {
                        System.out.println("Balance " + newBalance);
+                      userAccounts.get(accountNumberFromUser).setBalance(newBalance);
                    }
                    else
                    {
                        System.out.println("Insufficient Funds");
                    }
 
-                    //System.out.println("we in the withdraw account class");
-                    //break;
 
 
                 }
-            }
+
             return 0;
         }
 }
+
+
+
+
 
 
 
