@@ -15,8 +15,8 @@ public class Main {
 
 
     public static void main(String[] args) {
-       // Scanner scanner = new Scanner(System.in);
-       // String accountNumberFromUser = scanner.next();
+        // Scanner scanner = new Scanner(System.in);
+        // String accountNumberFromUser = scanner.next();
 
         boolean quit = false;
 
@@ -36,71 +36,72 @@ public class Main {
             scanner.nextLine();
             // scanner.next(); //git
 
-            switch (action) {
-                case 1:
+                switch (action) {
+                    case 1:
 
-                    createAccount();
+                        createAccount();
 
-                    break;
+                        break;
 
-                case 2:
+                    case 2:
 
-                    System.out.println("Please enter Account number");
-                    accountNumberFromUser = scanner.next();
-                    Account newAccount;
-                    while(accountServices.searchAccount(accountNumberFromUser) == null)
-                    {
-                        System.out.println("Account not found, Please enter a valid account number");
+                        System.out.println("Please enter Account number");
                         accountNumberFromUser = scanner.next();
-                    }
-                    newAccount = accountServices.viewAccount(accountNumberFromUser);
-                    System.out.println("Customer: " + newAccount.getCustomerName());
-                    System.out.println("Type of Account: " + newAccount.getTypeOfAccount());
-                    System.out.println("Balance : " + newAccount.getBalance());
+                        //Account newAccount;
+                        while (accountServices.searchAccount(accountNumberFromUser) == null) {
+                            System.out.println("Account not found, Please enter a valid account number");
+                            accountNumberFromUser = scanner.next();
+                        }
+                        Account newAccount;
+                        newAccount = accountServices.viewAccount(accountNumberFromUser);
+                        System.out.println("Customer: " + newAccount.getCustomerName());
+                        System.out.println("Type of Account: " + newAccount.getTypeOfAccount());
+                        System.out.println("Balance : " + newAccount.getBalance());
 
 
-                    break;
-                case 3:
+                        break;
+                    case 3:
 
-                    System.out.println("Please enter Account Number");
-                    accountNumberFromUser = scanner.next();
-                    System.out.println("How much money do you want to withdraw?");
-                    long withdraw = scanner.nextLong();
-                    accountServices.withdrawFunds(accountNumberFromUser, withdraw);
-                    break;
+                        System.out.println("Please enter Account Number");
+                        accountNumberFromUser = scanner.next();
+                        System.out.println("How much money do you want to withdraw?");
+                        long withdraw = scanner.nextLong();
+                        accountServices.withdrawFunds(accountNumberFromUser, withdraw);
+                        break;
 
-                case 4:
+                    case 4:
 
-                    System.out.println("Please enter Account Number");
-                    accountNumberFromUser = scanner.next();
-                    System.out.println("How much do you want to deposit?");
-                    long deposit = scanner.nextLong();
-                    accountServices.depositFunds(accountNumberFromUser, deposit);
-                    break;
+                        System.out.println("Please enter Account Number");
+                        accountNumberFromUser = scanner.next();
+                        System.out.println("How much do you want to deposit?");
+                        long deposit = scanner.nextLong();
+                        accountServices.depositFunds(accountNumberFromUser, deposit);
+                        break;
 
-                case 5:
-                    System.out.println("Please enter Account Number");
-                    accountNumberFromUser = scanner.next();
-                    accountServices.removeAccount(accountNumberFromUser);
+                    case 5:
+                        System.out.println("Please enter Account Number");
+                        accountNumberFromUser = scanner.next();
+                        accountServices.removeAccount(accountNumberFromUser);
 
-                    break;
+                        break;
 
-                case 6:
-                    quit = true;
-                    break;
+                    case 6:
+                        quit = true;
+                        break;
 
-                default:
-                    System.out.println("Please enter another choice");
-                    break;
+                    default:
+                        System.out.println("Please enter another choice");
+                        break;
 
 
-            }
+                }
+            } while (!quit);
+
+
         }
 
-
-    }
-
-    public static Account createAccount() {
+        public static Account createAccount()
+    {
 
         System.out.println("Your account will be created, Please enter name: ");
         String name = scanner.nextLine();
@@ -131,16 +132,6 @@ public class Main {
         return null;
     }
 
-
-
-
-
-
-
-//
-//    public static void randomMethod(Account account){
-//        System.out.println(account.getBalance());
-//    }
 
 
 }

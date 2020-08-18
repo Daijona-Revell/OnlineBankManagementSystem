@@ -41,7 +41,7 @@ public class AccountServices
         for (Map.Entry<String,Account> entry : userAccounts.entrySet())
         {
 
-            if (userAccounts.containsKey(accountNumber) == true)
+            if (userAccounts.containsKey(accountNumber))
             {
                 return userAccounts.get(accountNumber);
             }
@@ -55,62 +55,26 @@ public class AccountServices
     public Account viewAccount(String accountNumberFromUser)
     {
 
-        System.out.println("we in the view account class");
+        //System.out.println("we in the view account class");
 
-        Account newAccount;
-        newAccount = searchAccount(accountNumberFromUser);
-
-        return newAccount;
+        return searchAccount(accountNumberFromUser);
     }
 
             //Removes element from Map
     public Account removeAccount(String accountNumberFromUser)
     {
-    Account newAccount;
-    newAccount = searchAccount(accountNumberFromUser);
-
+    Account newAccount = searchAccount(accountNumberFromUser);
 
     if(newAccount!= null)
     {
         System.out.println("Account will be removed: " + userAccounts.remove(accountNumberFromUser).getCustomerName());
-
 
     }
     return null;
 
     }
 
-
-
-//        for (int i = 0; i < userAccounts.size(); i++) {
-//
-//            if (userAccounts.containsKey(accountNumberFromUser) == true)
-//            {
-//
-//
-//                return userAccounts.get(accountNumberFromUser);
-//                //return userAccounts.get(accountNumberFromUser);
-
-
-//                result = accounts.get(i);
-//                accountIndex = i;
-//                System.out.println("Customer Name: " + userAccounts.getCustomerName());
-//                System.out.println("Type of Account: " + accounts.get(accountIndex).getTypeOfAccount());
-//                System.out.println("Account Number: " + accounts.get(accountIndex).getAccountNumber());
-//                System.out.println("Balance: " + accounts.get(accountIndex).getBalance());
-        // System.out.println(account);
-        //return (true);
-
-        //System.out.println("we in the view account class");
-        // break;
-//            }
-
-        //return null;
-
-
-//
-//
-        public long depositFunds(String accountNumberFromUser, long deposit)
+    public long depositFunds(String accountNumberFromUser, long deposit)
         {
             Account newAccount;
             newAccount = searchAccount(accountNumberFromUser);
@@ -134,7 +98,7 @@ public class AccountServices
 //
 //        //Withdraw from amount
 //
-        public long withdrawFunds ( String accountNumberFromUser, long withdraw)
+    public long withdrawFunds ( String accountNumberFromUser, long withdraw)
         {
             //Finds person via account number
 
