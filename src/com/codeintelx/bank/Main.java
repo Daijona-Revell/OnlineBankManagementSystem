@@ -12,11 +12,13 @@ public class Main {
 
     public static Scanner scanner = new Scanner(System.in);
     //public static String accountNumberFromUser;
+    static Account newAccount;
 
 
     public static void main(String[] args) {
         // Scanner scanner = new Scanner(System.in);
         // String accountNumberFromUser = scanner.next();
+
 
         boolean quit = false;
 
@@ -41,6 +43,7 @@ public class Main {
 
                         createAccount();
 
+
                         break;
 
                     case 2:
@@ -52,7 +55,7 @@ public class Main {
                             System.out.println("Account not found, Please enter a valid account number");
                             accountNumberFromUser = scanner.next();
                         }
-                        Account newAccount;
+                        //Account newAccount;
                         newAccount = accountServices.viewAccount(accountNumberFromUser);
                         System.out.println("Customer: " + newAccount.getCustomerName());
                         System.out.println("Type of Account: " + newAccount.getTypeOfAccount());
@@ -66,7 +69,13 @@ public class Main {
                         accountNumberFromUser = scanner.next();
                         System.out.println("How much money do you want to withdraw?");
                         long withdraw = scanner.nextLong();
-                        accountServices.withdrawFunds(accountNumberFromUser, withdraw);
+                       newAccount = accountServices.withdrawFunds(accountNumberFromUser, withdraw);
+                        System.out.println(newAccount.getBalance());
+                       if (newAccount == newAccount)
+                       {
+                           System.out.println("Insufficient Funds, Can't remove that much money. This is how much you have in your account");
+                           //System.out.println(newAccount.getBalance());
+                       }
                         break;
 
                     case 4:
@@ -75,13 +84,15 @@ public class Main {
                         accountNumberFromUser = scanner.next();
                         System.out.println("How much do you want to deposit?");
                         long deposit = scanner.nextLong();
-                        accountServices.depositFunds(accountNumberFromUser, deposit);
+                        newAccount = accountServices.depositFunds(accountNumberFromUser, deposit);
+                        System.out.println(newAccount.getBalance());
                         break;
 
                     case 5:
                         System.out.println("Please enter Account Number");
                         accountNumberFromUser = scanner.next();
                         accountServices.removeAccount(accountNumberFromUser);
+                        System.out.println("This account will be removed: " + newAccount.getCustomerName());
 
                         break;
 
@@ -102,6 +113,7 @@ public class Main {
 
         public static Account createAccount()
     {
+        //newAccount = accountServices.ce(accountNumberFromUser);
 
         System.out.println("Your account will be created, Please enter name: ");
         String name = scanner.nextLine();
@@ -115,7 +127,11 @@ public class Main {
             long balance = scanner.nextLong();
 
             System.out.println("New customer added: ");
-            accountServices.createAccount(name, type, balance);
+           newAccount = accountServices.createAccount(name, type, balance);
+            System.out.println("Customer: " + newAccount.getCustomerName());
+            //System.out.println("New Account Number: " + accountServices.returnAccountNumber());
+            System.out.println("Type of Account: " + newAccount.getTypeOfAccount());
+            System.out.println("Balance : " + newAccount.getBalance());
 
             //accountServices.createAccount(name, type, accountNumber, balance);
         } else if (type.equals("Savings")) {
@@ -124,13 +140,17 @@ public class Main {
             long balance = scanner.nextLong();
             System.out.println("New customer added: ");
 
-            accountServices.createAccount(name, type, balance);
-//           randomMethod(newAccount);
-//           randomMethod(accountServices.createAccount(name, type, accountNumber, balance));
+           newAccount = accountServices.createAccount(name, type, balance);
+            System.out.println("Customer: " + newAccount.getCustomerName());
+            //System.out.println("New Account Number: " + newAccount.);
+            System.out.println("Type of Account: " + newAccount.getTypeOfAccount());
+            System.out.println("Balance : " + newAccount.getBalance());
 
         }
-        return null;
-    }
+        return  newAccount;
+//        System.out.println("Type of Account: " + newAccount.getTypeOfAccount());
+//        System.out.println("Balance : " + newAccount.getBalance());
+   }
 
 
 
