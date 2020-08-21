@@ -71,7 +71,7 @@ public class Main {
                         long withdraw = scanner.nextLong();
                        newAccount = accountServices.withdrawFunds(accountNumberFromUser, withdraw);
                         System.out.println(newAccount.getBalance());
-                       if (newAccount == newAccount)
+                       if (newAccount.getBalance()<0)
                        {
                            System.out.println("Insufficient Funds, Can't remove that much money. This is how much you have in your account");
                            //System.out.println(newAccount.getBalance());
@@ -114,6 +114,7 @@ public class Main {
         public static Account createAccount()
     {
         //newAccount = accountServices.ce(accountNumberFromUser);
+        String accountNumber = "";
 
         System.out.println("Your account will be created, Please enter name: ");
         String name = scanner.nextLine();
@@ -129,7 +130,7 @@ public class Main {
             System.out.println("New customer added: ");
            newAccount = accountServices.createAccount(name, type, balance);
             System.out.println("Customer: " + newAccount.getCustomerName());
-            //System.out.println("New Account Number: " + accountServices.returnAccountNumber());
+            System.out.println("New Account Number: " + newAccount.getAccountNumber());
             System.out.println("Type of Account: " + newAccount.getTypeOfAccount());
             System.out.println("Balance : " + newAccount.getBalance());
 

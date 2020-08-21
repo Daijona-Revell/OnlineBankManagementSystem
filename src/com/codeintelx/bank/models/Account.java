@@ -3,16 +3,17 @@ package com.codeintelx.bank.models;
 public class Account
 {
 
-    private int accountNumber;
+    private String accountNumber;
     private long balance;
     private String customerName;
     private String typeOfAccount;
+
 
     public Account()
     {
     }
 
-    public Account(String customerName, String typeOfAccount, long balance)
+    public Account(String accountNumber, String customerName, String typeOfAccount, long balance)
     {
         this.accountNumber = accountNumber;
         this.customerName = customerName;
@@ -20,13 +21,13 @@ public class Account
         this.balance = balance;
     }
 
-    public int getAccountNumber()
+    public String getAccountNumber()
     {
         return accountNumber;
     }
 
 
-    public void setAccountNumber(int accountNumber)
+    public void setAccountNumber(String accountNumber)
     {
         this.accountNumber = accountNumber;
     }

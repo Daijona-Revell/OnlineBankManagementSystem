@@ -20,11 +20,13 @@ public class AccountServices
     //Adds customer to account array list.
     public Account createAccount(String name, String type, long balance)
     {
+        //UUID uuid = UUID.randomUUID();
+        String accountNumber = (Long.toString(UUID.randomUUID().getMostSignificantBits()).substring(1, 11).replace("-", ""));
         //System.out.println("Create Account Class");
-        Account newAccount = new Account(name, type, balance);
-        UUID uuid = UUID.randomUUID();
+        Account newAccount = new Account(accountNumber, name, type, balance);
+        //UUID uuid = UUID.randomUUID();
 //       // String numericUUID = Long.toString(uuid.getMostSignificantBits()) + Long.toString(uuid.getLeastSignificantBits());
-        String accountNumber = (Long.toString(UUID.randomUUID().getMostSignificantBits()).substring(1,11).replace("-", ""));
+        //accountNumber = (Long.toString(UUID.randomUUID().getMostSignificantBits()).substring(1,11).replace("-", ""));
 
 
 
@@ -42,7 +44,7 @@ public class AccountServices
 
 //        Displays Customer name, Account Number, and Balance
 //        System.out.println("Customer: " + userAccounts.get(accountNumber).getCustomerName());
-        //System.out.println("Your new account number is: " + accountNumber);
+       // System.out.println("Your new account number is: " + accountNumber);
 
         return newAccount;
     }
@@ -141,7 +143,7 @@ public class AccountServices
                     // Sets new Balance in newBalance
                    long newBalance = (newAccount.getBalance() - withdraw);
                    //Sets new balance in the array list
-                   if(newBalance>0)
+                   if(newBalance>=0)
                    {
                        //System.out.println("Balance: " + newBalance);
                       userAccounts.get(accountNumberFromUser).setBalance(newBalance);
