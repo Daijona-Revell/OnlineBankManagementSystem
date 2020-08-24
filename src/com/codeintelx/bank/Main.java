@@ -51,15 +51,21 @@ public class Main {
                         System.out.println("Please enter Account number");
                         accountNumberFromUser = scanner.next();
                         //Account newAccount;
-                        while (accountServices.searchAccount(accountNumberFromUser) == null) {
-                            System.out.println("Account not found, Please enter a valid account number");
-                            accountNumberFromUser = scanner.next();
-                        }
+//                        while (accountServices.searchAccount(accountNumberFromUser) == null) {
+//                            System.out.println("Account not found, Please enter a valid account number");
+//                            accountNumberFromUser = scanner.next();
+//                        }
                         //Account newAccount;
-                        newAccount = accountServices.viewAccount(accountNumberFromUser);
-                        System.out.println("Customer: " + newAccount.getCustomerName());
-                        System.out.println("Type of Account: " + newAccount.getTypeOfAccount());
-                        System.out.println("Balance : " + newAccount.getBalance());
+                        try {
+
+                            newAccount = accountServices.viewAccount(accountNumberFromUser);
+                            System.out.println("Customer: " + newAccount.getCustomerName());
+                            System.out.println("Type of Account: " + newAccount.getTypeOfAccount());
+                            System.out.println("Balance : " + newAccount.getBalance());
+                        }catch (AccountNotFoundException e)
+                        {
+                            System.out.println("Account Not Found");
+                        }
 
 
                         break;
@@ -70,12 +76,18 @@ public class Main {
                         System.out.println("How much money do you want to withdraw?");
                         long withdraw = scanner.nextLong();
                         try {
+
                             newAccount = accountServices.withdrawFunds(accountNumberFromUser, withdraw);
                             System.out.println("New Balance: " + newAccount.getBalance());
-                        } catch ( Exception InsufficientFundsException)
-                        {
-                            System.out.println("Insufficient funds");
                         }
+                        catch(AccountNotFoundException e)
+                        {
+                            System.out.println("Account unavailable ");
+                        }
+                            catch(InsufficientFundsException e)
+                            {
+                                System.out.println( "Insufficient Funds, Please try again. You have this much in your account: " + newAccount.getBalance());
+                            }
 //                       if (newAccount.getBalance()<0)
 //                       {
 //                           System.out.println("Insufficient Funds, Can't remove that much money. This is how much you have in your account");
@@ -93,17 +105,27 @@ public class Main {
                         try {
                             newAccount = accountServices.depositFunds(accountNumberFromUser, deposit);
                             System.out.println("New Balance: " + newAccount.getBalance());
-                        } catch (Exception InsufficientFundsException)
+                        } catch (InsufficientFundsException e)
                         {
                             System.out.println("Please enter another value");
+                        }
+                        catch (AccountNotFoundException e)
+                        {
+                            System.out.println("Account not Found");
                         }
                         break;
 
                     case 5:
                         System.out.println("Please enter Account Number");
                         accountNumberFromUser = scanner.next();
-                        accountServices.removeAccount(accountNumberFromUser);
-                        System.out.println("This account will be removed: " + newAccount.getCustomerName());
+                        try {
+
+                            accountServices.removeAccount(accountNumberFromUser);
+                            System.out.println("This account will be removed: " + newAccount.getCustomerName());
+                        }catch (AccountNotFoundException e)
+                        {
+                            System.out.println("Account Not Found");
+                        }
 
                         break;
 
@@ -154,7 +176,7 @@ public class Main {
 
            newAccount = accountServices.createAccount(name, type, balance);
             System.out.println("Customer: " + newAccount.getCustomerName());
-            //System.out.println("New Account Number: " + newAccount.);
+            System.out.println("New Account Number: " + newAccount.getAccountNumber());
             System.out.println("Type of Account: " + newAccount.getTypeOfAccount());
             System.out.println("Balance : " + newAccount.getBalance());
 

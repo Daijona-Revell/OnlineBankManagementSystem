@@ -1,5 +1,7 @@
 package com.codeintelx.bank.services;
 
+import com.codeintelx.bank.AccountNotFoundException;
+import com.codeintelx.bank.InsufficientFundsException;
 import com.codeintelx.bank.models.Account;
 
 import javax.naming.InsufficientResourcesException;
@@ -64,17 +66,19 @@ public class AccountServices
 
     //Search Map for key and returns the accountNumber
 
-    public Account searchAccount(String accountNumber)
+    private Account searchAccount(String accountNumber) throws AccountNotFoundException
     {
         //System.out.println("Search Account method");
 
 //        for (Map.Entry<String,Account> entry : userAccounts.entrySet())
 //        {
 //
-//            if (userAccounts.containsKey(accountNumber))
-//            {
-//                return userAccounts.get(accountNumber);
-//            }
+            if (!userAccounts.containsKey(accountNumber))
+            {
+                throw new AccountNotFoundException();
+                //return userAccounts.get(accountNumber);
+            }
+
 //        }
         return userAccounts.get(accountNumber);
         //return null;
@@ -83,7 +87,7 @@ public class AccountServices
 
     //View Account input from the user
 
-    public Account viewAccount(String accountNumberFromUser)
+    public Account viewAccount(String accountNumberFromUser) throws AccountNotFoundException
     {
 
         //System.out.println("we in the view account class");
@@ -92,7 +96,7 @@ public class AccountServices
     }
 
             //Removes element from Map
-    public Account removeAccount(String accountNumberFromUser)
+    public Account removeAccount(String accountNumberFromUser) throws AccountNotFoundException
     {
     Account newAccount = searchAccount(accountNumberFromUser);
         userAccounts.remove(accountNumberFromUser);
@@ -108,13 +112,18 @@ public class AccountServices
 
     }
 
-    public Account depositFunds(String accountNumberFromUser, long deposit)
+    public Account depositFunds(String accountNumberFromUser, long deposit) throws AccountNotFoundException, InsufficientFundsException
     {
         Account newAccount;
         newAccount = searchAccount(accountNumberFromUser);
 
-        try
+
+        if(deposit<0)
         {
+            throw new InsufficientFundsException();
+        }
+
+
             if (newAccount != null)
             {
                 //int accountIndex = i;
@@ -127,17 +136,14 @@ public class AccountServices
                 //System.out.println( "Balance " + deposit);
 
             }
-        } catch (Exception InsufficientFundsException)
-        {
-            throw InsufficientFundsException;
-        }
+
         return newAccount;
     }
 
 //
 //        //Withdraw from amount
 //
-    public Account withdrawFunds ( String accountNumberFromUser, long withdraw)
+    public Account withdrawFunds ( String accountNumberFromUser, long withdraw) throws InsufficientFundsException, AccountNotFoundException
         {
             //Finds person via account number
 
@@ -154,6 +160,10 @@ public class AccountServices
                 {
                     //System.out.println("Balance: " + newBalance);
                     userAccounts.get(accountNumberFromUser).setBalance(newBalance);
+                }
+                else if (newBalance<0)
+                {
+                    throw new InsufficientFundsException();
                 }
 
             }
