@@ -69,13 +69,18 @@ public class Main {
                         accountNumberFromUser = scanner.next();
                         System.out.println("How much money do you want to withdraw?");
                         long withdraw = scanner.nextLong();
-                       newAccount = accountServices.withdrawFunds(accountNumberFromUser, withdraw);
-                        System.out.println(newAccount.getBalance());
-                       if (newAccount.getBalance()<0)
-                       {
-                           System.out.println("Insufficient Funds, Can't remove that much money. This is how much you have in your account");
-                           //System.out.println(newAccount.getBalance());
-                       }
+                        try {
+                            newAccount = accountServices.withdrawFunds(accountNumberFromUser, withdraw);
+                            System.out.println("New Balance: " + newAccount.getBalance());
+                        } catch ( Exception InsufficientFundsException)
+                        {
+                            System.out.println("Insufficient funds");
+                        }
+//                       if (newAccount.getBalance()<0)
+//                       {
+//                           System.out.println("Insufficient Funds, Can't remove that much money. This is how much you have in your account");
+//                           //System.out.println(newAccount.getBalance());
+//                       }
                         break;
 
                     case 4:
@@ -84,8 +89,14 @@ public class Main {
                         accountNumberFromUser = scanner.next();
                         System.out.println("How much do you want to deposit?");
                         long deposit = scanner.nextLong();
-                        newAccount = accountServices.depositFunds(accountNumberFromUser, deposit);
-                        System.out.println(newAccount.getBalance());
+
+                        try {
+                            newAccount = accountServices.depositFunds(accountNumberFromUser, deposit);
+                            System.out.println("New Balance: " + newAccount.getBalance());
+                        } catch (Exception InsufficientFundsException)
+                        {
+                            System.out.println("Please enter another value");
+                        }
                         break;
 
                     case 5:
@@ -114,10 +125,10 @@ public class Main {
         public static Account createAccount()
     {
         //newAccount = accountServices.ce(accountNumberFromUser);
-        String accountNumber = "";
+        //String accountNumber = "";
 
         System.out.println("Your account will be created, Please enter name: ");
-        String name = scanner.nextLine();
+        String name = scanner.next();
 
         System.out.println("Which account would you like to access? (Checking or Savings)");
         String type = scanner.next();

@@ -2,7 +2,9 @@ package com.codeintelx.bank.services;
 
 import com.codeintelx.bank.models.Account;
 
+import javax.naming.InsufficientResourcesException;
 import java.util.*;
+
 
 public class AccountServices
 {
@@ -20,8 +22,8 @@ public class AccountServices
     //Adds customer to account array list.
     public Account createAccount(String name, String type, long balance)
     {
-        //UUID uuid = UUID.randomUUID();
-        String accountNumber = (Long.toString(UUID.randomUUID().getMostSignificantBits()).substring(1, 11).replace("-", ""));
+        UUID uuid = UUID.randomUUID();
+        String accountNumber = (Long.toString(uuid.randomUUID().getMostSignificantBits()).substring(1, 11).replace("-", ""));
         //System.out.println("Create Account Class");
         Account newAccount = new Account(accountNumber, name, type, balance);
         //UUID uuid = UUID.randomUUID();
@@ -107,25 +109,30 @@ public class AccountServices
     }
 
     public Account depositFunds(String accountNumberFromUser, long deposit)
+    {
+        Account newAccount;
+        newAccount = searchAccount(accountNumberFromUser);
+
+        try
         {
-            Account newAccount;
-            newAccount = searchAccount(accountNumberFromUser);
-//
-                if (newAccount!= null)
-                {
-                    //int accountIndex = i;
-                    //System.out.println("Name: " + newAccount.getCustomerName());
-                    //Adds deposit to balance
-                    deposit += newAccount.getBalance() ;
-                    //Sets new balance (deposit) in the index
-                    userAccounts.get(accountNumberFromUser).setBalance(deposit);
-                    //Displays new deposit amount
-                    //System.out.println( "Balance " + deposit);
+            if (newAccount != null)
+            {
+                //int accountIndex = i;
+                //System.out.println("Name: " + newAccount.getCustomerName());
+                //Adds deposit to balance
+                deposit += newAccount.getBalance();
+                //Sets new balance (deposit) in the index
+                userAccounts.get(accountNumberFromUser).setBalance(deposit);
+                //Displays new deposit amount
+                //System.out.println( "Balance " + deposit);
 
-
-                 }
-                return newAccount;
+            }
+        } catch (Exception InsufficientFundsException)
+        {
+            throw InsufficientFundsException;
         }
+        return newAccount;
+    }
 
 //
 //        //Withdraw from amount
@@ -134,27 +141,23 @@ public class AccountServices
         {
             //Finds person via account number
 
-            Account newAccount;
-            newAccount = searchAccount(accountNumberFromUser);
+                Account newAccount;
+                newAccount = searchAccount(accountNumberFromUser);
 
-                if (newAccount!= null)
+            if (newAccount != null)
+            {
+                //System.out.println("Name: " + newAccount.getCustomerName());
+                // Sets new Balance in newBalance
+                long newBalance = (newAccount.getBalance() - withdraw);
+                //Sets new balance in the array list
+                if (newBalance >= 0)
                 {
-                    //System.out.println("Name: " + newAccount.getCustomerName());
-                    // Sets new Balance in newBalance
-                   long newBalance = (newAccount.getBalance() - withdraw);
-                   //Sets new balance in the array list
-                   if(newBalance>=0)
-                   {
-                       //System.out.println("Balance: " + newBalance);
-                      userAccounts.get(accountNumberFromUser).setBalance(newBalance);
-                   }
-//                   else
-//                   {
-//                       return null;
-//                       //System.out.println("Insufficient Funds");
-//                   }
-
+                    //System.out.println("Balance: " + newBalance);
+                    userAccounts.get(accountNumberFromUser).setBalance(newBalance);
                 }
+
+            }
+
 
             return newAccount;
         }
