@@ -1,10 +1,9 @@
 package com.codeintelx.bank.services;
 
-import com.codeintelx.bank.AccountNotFoundException;
-import com.codeintelx.bank.InsufficientFundsException;
+import com.codeintelx.bank.exceptions.AccountNotFoundException;
+import com.codeintelx.bank.exceptions.InsufficientFundsException;
 import com.codeintelx.bank.models.Account;
 
-import javax.naming.InsufficientResourcesException;
 import java.util.*;
 
 
@@ -75,7 +74,7 @@ public class AccountServices
 //
             if (!userAccounts.containsKey(accountNumber))
             {
-                throw new AccountNotFoundException();
+                throw new AccountNotFoundException("Account not found, please enter another account number");
                 //return userAccounts.get(accountNumber);
             }
 
@@ -96,10 +95,10 @@ public class AccountServices
     }
 
             //Removes element from Map
-    public Account removeAccount(String accountNumberFromUser) throws AccountNotFoundException
+    public void removeAccount(String accountNumberFromUser) throws AccountNotFoundException
     {
     Account newAccount = searchAccount(accountNumberFromUser);
-        userAccounts.remove(accountNumberFromUser);
+        userAccounts.remove(newAccount);
 
 //    if(newAccount!= null)
 //    {
@@ -108,7 +107,7 @@ public class AccountServices
 //        //System.out.println("Account will be removed: " + userAccounts.remove(accountNumberFromUser).getCustomerName());
 //
 //    }
-    return newAccount;
+    //return newAccount;
 
     }
 
@@ -120,7 +119,7 @@ public class AccountServices
 
         if(deposit<0)
         {
-            throw new InsufficientFundsException();
+            throw new InsufficientFundsException("You cannot enter a negative value");
         }
 
 
@@ -131,7 +130,7 @@ public class AccountServices
                 //Adds deposit to balance
                 deposit += newAccount.getBalance();
                 //Sets new balance (deposit) in the index
-                userAccounts.get(accountNumberFromUser).setBalance(deposit);
+                newAccount.setBalance(deposit);
                 //Displays new deposit amount
                 //System.out.println( "Balance " + deposit);
 
@@ -159,11 +158,12 @@ public class AccountServices
                 if (newBalance >= 0)
                 {
                     //System.out.println("Balance: " + newBalance);
-                    userAccounts.get(accountNumberFromUser).setBalance(newBalance);
+                    newAccount.setBalance(newBalance);
                 }
                 else if (newBalance<0)
                 {
-                    throw new InsufficientFundsException();
+                    throw new InsufficientFundsException("Insufficient Funds, You have " + newAccount.getBalance() + " in your account.");
+
                 }
 
             }

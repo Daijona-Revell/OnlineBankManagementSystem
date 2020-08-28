@@ -1,5 +1,7 @@
 package com.codeintelx.bank;
 
+import com.codeintelx.bank.exceptions.AccountNotFoundException;
+import com.codeintelx.bank.exceptions.InsufficientFundsException;
 import com.codeintelx.bank.models.Account;
 import com.codeintelx.bank.services.AccountServices;
 
@@ -82,11 +84,12 @@ public class Main {
                         }
                         catch(AccountNotFoundException e)
                         {
-                            System.out.println("Account unavailable ");
+                            System.out.println(e.getMessage());
                         }
-                            catch(InsufficientFundsException e)
+                            catch(InsufficientFundsException errorMessage)
                             {
-                                System.out.println( "Insufficient Funds, Please try again. You have this much in your account: " + newAccount.getBalance());
+                                System.out.println(errorMessage.getMessage());
+                               // System.out.println( "Insufficient Funds, Please try again. You have this much in your account: " + newAccount.getBalance());
                             }
 //                       if (newAccount.getBalance()<0)
 //                       {
@@ -105,13 +108,13 @@ public class Main {
                         try {
                             newAccount = accountServices.depositFunds(accountNumberFromUser, deposit);
                             System.out.println("New Balance: " + newAccount.getBalance());
-                        } catch (InsufficientFundsException e)
+                        } catch (InsufficientFundsException errorMessage)
                         {
-                            System.out.println("Please enter another value");
+                            System.out.println(errorMessage.getMessage());
                         }
                         catch (AccountNotFoundException e)
                         {
-                            System.out.println("Account not Found");
+                            System.out.println(e.getMessage());
                         }
                         break;
 
@@ -124,7 +127,7 @@ public class Main {
                             System.out.println("This account will be removed: " + newAccount.getCustomerName());
                         }catch (AccountNotFoundException e)
                         {
-                            System.out.println("Account Not Found");
+                            System.out.println(e.getMessage());
                         }
 
                         break;
