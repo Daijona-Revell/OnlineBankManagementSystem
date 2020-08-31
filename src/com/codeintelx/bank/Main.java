@@ -34,7 +34,8 @@ public class Main {
                     "3.Withdraw from Account \n" +
                     "4.Deposit from Account\n" +
                     "5.Remove Account\n" +
-                    "6.Quit Program");
+                    "6.View all Bank Accounts\n" +
+                    "7.Quit Program");
 
             int action = scanner.nextInt();
             scanner.nextLine();
@@ -131,8 +132,14 @@ public class Main {
                         }
 
                         break;
-
                     case 6:
+                     accountServices.viewAllAccountsInMap();
+                    // System.out.println(newAccount.getAccountNumber() + newAccount.getCustomerName());
+
+
+
+
+                    case 7:
                         quit = true;
                         break;
 
