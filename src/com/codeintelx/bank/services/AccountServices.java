@@ -21,14 +21,14 @@ public class AccountServices {
         UUID uuid = UUID.randomUUID();
         String accountNumber = (Long.toString(uuid.randomUUID().getMostSignificantBits()).substring(1, 11).replace("-", ""));
         //System.out.println("Create Account Class");
-        Account newAccount = new Account(accountNumber, name, type, balance);
+        Account newUserAccount = new Account(accountNumber, name, type, balance);
         //UUID uuid = UUID.randomUUID();
 //       // String numericUUID = Long.toString(uuid.getMostSignificantBits()) + Long.toString(uuid.getLeastSignificantBits());
         //accountNumber = (Long.toString(UUID.randomUUID().getMostSignificantBits()).substring(1,11).replace("-", ""));
 
 
         //String accountNumber = returnAccountNumber();
-        userAccounts.put(accountNumber, newAccount);
+        userAccounts.put(accountNumber, newUserAccount);
 
         //Account test = userAccounts.keySet();
 
@@ -39,7 +39,7 @@ public class AccountServices {
 //        System.out.println("Customer: " + userAccounts.get(accountNumber).getCustomerName());
         // System.out.println("Your new account number is: " + accountNumber);
 
-        return newAccount;
+        return newUserAccount;
     }
 
 
@@ -73,7 +73,7 @@ public class AccountServices {
 
     //View Account input from the user
 
-    public Account viewAccount(String accountNumberFromUser) throws AccountNotFoundException {
+    public Account viewUserAccount(String accountNumberFromUser) throws AccountNotFoundException {
 
         //System.out.println("we in the view account class");
 
@@ -150,15 +150,10 @@ public class AccountServices {
     }
 
 
-    public String viewAllAccountsInMap() {
+    public Map<String, Account> viewAllAccountsInMap()
+    {
 
-
-        for (Map.Entry<String, Account> entry : userAccounts.entrySet()) {
-
-                String key = entry.getKey();
-                Account value = entry.getValue();
-                System.out.println(key + ": " + value.getCustomerName() + " , " + value.getBalance() +  " , "
-                        + value.getTypeOfAccount());
+        return userAccounts;
 
         }
         // return userAccounts.;
@@ -183,10 +178,10 @@ public class AccountServices {
         //return account;
 //        for (Map.Entry<String, Account> entry : userAccounts.entrySet())
 //            return entry.getKey() + entry.getValue().getCustomerName();
-        return "There seems to be an error.";
+        //return "There seems to be an error.";
 //
 //
-    }
+
 }
 
 

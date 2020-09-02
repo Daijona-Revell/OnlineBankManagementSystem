@@ -14,7 +14,7 @@ public class Main {
 
     public static Scanner scanner = new Scanner(System.in);
     //public static String accountNumberFromUser;
-    static Account newAccount;
+    static Account newAccountObject;
 
 
     public static void main(String[] args) {
@@ -61,10 +61,10 @@ public class Main {
                         //Account newAccount;
                         try {
 
-                            newAccount = accountServices.viewAccount(accountNumberFromUser);
-                            System.out.println("Customer: " + newAccount.getCustomerName());
-                            System.out.println("Type of Account: " + newAccount.getTypeOfAccount());
-                            System.out.println("Balance : " + newAccount.getBalance());
+                            newAccountObject = accountServices.viewUserAccount(accountNumberFromUser);
+                            System.out.println("Customer: " + newAccountObject.getCustomerName());
+                            System.out.println("Type of Account: " + newAccountObject.getTypeOfAccount());
+                            System.out.println("Balance : " + newAccountObject.getBalance());
                         }catch (AccountNotFoundException e)
                         {
                             System.out.println("Account Not Found");
@@ -80,8 +80,8 @@ public class Main {
                         long withdraw = scanner.nextLong();
                         try {
 
-                            newAccount = accountServices.withdrawFunds(accountNumberFromUser, withdraw);
-                            System.out.println("New Balance: " + newAccount.getBalance());
+                            newAccountObject = accountServices.withdrawFunds(accountNumberFromUser, withdraw);
+                            System.out.println("New Balance: " + newAccountObject.getBalance());
                         }
                         catch(AccountNotFoundException e)
                         {
@@ -107,8 +107,8 @@ public class Main {
                         long deposit = scanner.nextLong();
 
                         try {
-                            newAccount = accountServices.depositFunds(accountNumberFromUser, deposit);
-                            System.out.println("New Balance: " + newAccount.getBalance());
+                            newAccountObject = accountServices.depositFunds(accountNumberFromUser, deposit);
+                            System.out.println("New Balance: " + newAccountObject.getBalance());
                         } catch (InsufficientFundsException errorMessage)
                         {
                             System.out.println(errorMessage.getMessage());
@@ -125,7 +125,7 @@ public class Main {
                         try {
 
                             accountServices.removeAccount(accountNumberFromUser);
-                            System.out.println("This account will be removed: " + newAccount.getCustomerName());
+                            System.out.println("This account will be removed: " + newAccountObject.getCustomerName());
                         }catch (AccountNotFoundException e)
                         {
                             System.out.println(e.getMessage());
@@ -133,10 +133,16 @@ public class Main {
 
                         break;
                     case 6:
-                     accountServices.viewAllAccountsInMap();
-                    // System.out.println(newAccount.getAccountNumber() + newAccount.getCustomerName());
+                        for (Map.Entry<String, Account> entry : accountServices.viewAllAccountsInMap().entrySet())
+                        {
 
+                            System.out.println("Account Number " + entry.getKey() + ": Customer Name: "
+                                    + entry.getValue().getCustomerName() + ", Balance: "
+                                     + entry.getValue().getBalance() + " , Type of Account: "
+                                    + entry.getValue().getTypeOfAccount());
+                        }
 
+                     break;
 
 
                     case 7:
@@ -160,7 +166,7 @@ public class Main {
         //String accountNumber = "";
 
         System.out.println("Your account will be created, Please enter name: ");
-        String name = scanner.next();
+        String name = scanner.nextLine();
 
         System.out.println("Which account would you like to access? (Checking or Savings)");
         String type = scanner.next();
@@ -171,11 +177,11 @@ public class Main {
             long balance = scanner.nextLong();
 
             System.out.println("New customer added: ");
-           newAccount = accountServices.createAccount(name, type, balance);
-            System.out.println("Customer: " + newAccount.getCustomerName());
-            System.out.println("New Account Number: " + newAccount.getAccountNumber());
-            System.out.println("Type of Account: " + newAccount.getTypeOfAccount());
-            System.out.println("Balance : " + newAccount.getBalance());
+           newAccountObject = accountServices.createAccount(name, type, balance);
+            System.out.println("Customer: " + newAccountObject.getCustomerName());
+            System.out.println("New Account Number: " + newAccountObject.getAccountNumber());
+            System.out.println("Type of Account: " + newAccountObject.getTypeOfAccount());
+            System.out.println("Balance : " + newAccountObject.getBalance());
 
             //accountServices.createAccount(name, type, accountNumber, balance);
         } else if (type.equals("Savings")) {
@@ -184,14 +190,14 @@ public class Main {
             long balance = scanner.nextLong();
             System.out.println("New customer added: ");
 
-           newAccount = accountServices.createAccount(name, type, balance);
-            System.out.println("Customer: " + newAccount.getCustomerName());
-            System.out.println("New Account Number: " + newAccount.getAccountNumber());
-            System.out.println("Type of Account: " + newAccount.getTypeOfAccount());
-            System.out.println("Balance : " + newAccount.getBalance());
+           newAccountObject = accountServices.createAccount(name, type, balance);
+            System.out.println("Customer: " + newAccountObject.getCustomerName());
+            System.out.println("New Account Number: " + newAccountObject.getAccountNumber());
+            System.out.println("Type of Account: " + newAccountObject.getTypeOfAccount());
+            System.out.println("Balance : " + newAccountObject.getBalance());
 
         }
-        return  newAccount;
+        return newAccountObject;
 //        System.out.println("Type of Account: " + newAccount.getTypeOfAccount());
 //        System.out.println("Balance : " + newAccount.getBalance());
    }
