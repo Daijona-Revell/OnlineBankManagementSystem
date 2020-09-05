@@ -8,11 +8,6 @@ public class Account
     private String customerName;
     private String typeOfAccount;
 
-
-    public Account()
-    {
-    }
-
     public Account(String accountNumber, String customerName, String typeOfAccount, long balance)
     {
         this.accountNumber = accountNumber;
@@ -24,12 +19,6 @@ public class Account
     public String getAccountNumber()
     {
         return accountNumber;
-    }
-
-
-    public void setAccountNumber(String accountNumber)
-    {
-        this.accountNumber = accountNumber;
     }
 
     public long getBalance()
@@ -47,19 +36,9 @@ public class Account
         return customerName;
     }
 
-    public void setCustomerName(String customerName)
-    {
-        this.customerName = customerName;
-    }
-
     public String getTypeOfAccount()
     {
         return typeOfAccount;
-    }
-
-    public void setTypeOfAccount(String typeOfAccount)
-    {
-        this.typeOfAccount = typeOfAccount;
     }
 
 }
