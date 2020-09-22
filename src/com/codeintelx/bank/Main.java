@@ -3,6 +3,7 @@ package com.codeintelx.bank;
 import com.codeintelx.bank.exceptions.AccountNotFoundException;
 import com.codeintelx.bank.exceptions.InsufficientFundsException;
 import com.codeintelx.bank.models.Account;
+import com.codeintelx.bank.repository.AccountsRepository;
 import com.codeintelx.bank.services.AccountServices;
 
 import java.util.*;
@@ -10,6 +11,7 @@ import java.util.*;
 public class Main
 {
     public static AccountServices accountServices = new AccountServices();
+    public static AccountsRepository accountsRepository = new AccountsRepository();
 
     public static Scanner scanner = new Scanner(System.in);
 
@@ -153,33 +155,33 @@ public class Main
     public static Account createAccount()
     {
 
-        System.out.println("Your account will be created, Please enter name: ");
-        String name = scanner.nextLine();
+        System.out.println("Your account will be created, Please enter Name: ");
+        String customerName = scanner.nextLine();
 
         System.out.println("Which account would you like to access? (Checking or Savings)");
-        String type = scanner.next();
+        String typeOfAccount = scanner.next();
 
-        if (type.equals("Checking"))
+        if (typeOfAccount.equals("Checking"))
         {
             System.out.println("Checking account created:");
             System.out.println("How much money will you input?");
             long balance = scanner.nextLong();
             System.out.println("New customer added: ");
-            newAccountObject = accountServices.createAccount(name, type, balance);
+            newAccountObject = accountsRepository.createAccount(customerName, typeOfAccount, balance);
             System.out.println("Customer: " + newAccountObject.getCustomerName());
             System.out.println("New Account Number: " + newAccountObject.getAccountNumber());
             System.out.println("Type of Account: " + newAccountObject.getTypeOfAccount());
             System.out.println("Balance : " + newAccountObject.getBalance());
 
         }
-        else if (type.equals("Savings"))
+        else if (typeOfAccount.equals("Savings"))
         {
             System.out.println("Saving account created:");
             System.out.println("How much money will you input?");
             long balance = scanner.nextLong();
             System.out.println("New customer added: ");
 
-            newAccountObject = accountServices.createAccount(name, type, balance);
+            newAccountObject = accountsRepository.createAccount(customerName, typeOfAccount, balance);
             System.out.println("Customer: " + newAccountObject.getCustomerName());
             System.out.println("New Account Number: " + newAccountObject.getAccountNumber());
             System.out.println("Type of Account: " + newAccountObject.getTypeOfAccount());
