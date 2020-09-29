@@ -3,15 +3,14 @@ package com.codeintelx.bank;
 import com.codeintelx.bank.exceptions.AccountNotFoundException;
 import com.codeintelx.bank.exceptions.InsufficientFundsException;
 import com.codeintelx.bank.models.Account;
-import com.codeintelx.bank.repository.AccountsRepository;
 import com.codeintelx.bank.services.AccountServices;
 
+import java.sql.SQLException;
 import java.util.*;
 
 public class Main
 {
     public static AccountServices accountServices = new AccountServices();
-    public static AccountsRepository accountsRepository = new AccountsRepository();
 
     public static Scanner scanner = new Scanner(System.in);
 
@@ -50,18 +49,16 @@ public class Main
 
                     System.out.println("Please enter Account number");
                     accountNumberFromUser = scanner.next();
-
-                    try
-                    {
-                        newAccountObject = accountServices.viewUserAccount(accountNumberFromUser);
+                    try {
+                        newAccountObject = accountServices.searchAccount(accountNumberFromUser);
                         System.out.println("Customer: " + newAccountObject.getCustomerName());
                         System.out.println("Type of Account: " + newAccountObject.getTypeOfAccount());
                         System.out.println("Balance : " + newAccountObject.getBalance());
-                    }
-                    catch (AccountNotFoundException e)
+                    } catch(AccountNotFoundException | SQLException errorMessage)
                     {
-                        System.out.println("Account Not Found");
+                        System.out.println(errorMessage.getMessage());
                     }
+
 
                     break;
 
@@ -83,12 +80,14 @@ public class Main
                     catch (InsufficientFundsException errorMessage)
                     {
                         System.out.println(errorMessage.getMessage());
+                    } catch (SQLException errorMessage) {
+                        errorMessage.getMessage();
                     }
 
                     break;
 
                 case 4:
-
+//
                     System.out.println("Please enter Account Number");
                     accountNumberFromUser = scanner.next();
                     System.out.println("How much do you want to deposit?");
@@ -106,6 +105,9 @@ public class Main
                     catch (AccountNotFoundException e)
                     {
                         System.out.println(e.getMessage());
+
+                    } catch (SQLException errorMessage) {
+                        errorMessage.getMessage();
                     }
 
                     break;
@@ -113,28 +115,36 @@ public class Main
                 case 5:
                     System.out.println("Please enter Account Number");
                     accountNumberFromUser = scanner.next();
-                    try
-                    {
+                    try {
+
                         accountServices.removeUserAccount(accountNumberFromUser);
-                        System.out.println("This account will be removed: " + newAccountObject.getCustomerName());
-                    }
-                    catch (AccountNotFoundException e)
+                        System.out.println("This account will be removed: " + accountNumberFromUser);
+                    } catch(SQLException | AccountNotFoundException errorMessage)
                     {
-                        System.out.println(e.getMessage());
+                        System.out.println(errorMessage.getMessage());
                     }
+
+
 
                     break;
 
                 case 6:
-                    for (Map.Entry<String, Account> entry : accountServices.viewAllAccountsInMap().entrySet())
+                    try {
+                        accountServices.viewAllAccountsInDatabase();
+                    }catch (SQLException errorMessage)
                     {
-
-                        System.out.println("Account Number: " + entry.getKey() +
-                                "\nCustomer Name: " + entry.getValue().getCustomerName() +
-                                "\nBalance: " + entry.getValue().getBalance() +
-                                "\nType of Account: " + entry.getValue().getTypeOfAccount() +
-                                "\n");
+                        System.out.println(errorMessage.getMessage());
                     }
+//                    for(Map.Entry<String, Account> entry : accountServices.viewAllAccountsInMap().entrySet())
+//                    {
+//                        System.out.println("Account Number: " + entry.getKey()
+//                                + "\nCustomer Name: " + entry.getValue().getCustomerName()
+//                                + "\nType Of Account: " + entry.getValue().getTypeOfAccount()
+//                                + "\nBalance: " + entry.getValue().getBalance()
+//                                + "\n");
+//                    }
+                       // accountServices.viewAllAccountsInMap();
+
 
                     break;
 
@@ -167,11 +177,11 @@ public class Main
             System.out.println("How much money will you input?");
             long balance = scanner.nextLong();
             System.out.println("New customer added: ");
-            newAccountObject = accountsRepository.createAccount(customerName, typeOfAccount, balance);
-            System.out.println("Customer: " + newAccountObject.getCustomerName());
-            System.out.println("New Account Number: " + newAccountObject.getAccountNumber());
-            System.out.println("Type of Account: " + newAccountObject.getTypeOfAccount());
-            System.out.println("Balance : " + newAccountObject.getBalance());
+            newAccountObject = accountServices.createAccount(customerName, typeOfAccount, balance);
+//            System.out.println("Customer: " + newAccountObject.getCustomerName());
+//            System.out.println("New Account Number: " + newAccountObject.getAccountNumber());
+//            System.out.println("Type of Account: " + newAccountObject.getTypeOfAccount());
+//            System.out.println("Balance : " + newAccountObject.getBalance());
 
         }
         else if (typeOfAccount.equals("Savings"))
@@ -181,11 +191,11 @@ public class Main
             long balance = scanner.nextLong();
             System.out.println("New customer added: ");
 
-            newAccountObject = accountsRepository.createAccount(customerName, typeOfAccount, balance);
-            System.out.println("Customer: " + newAccountObject.getCustomerName());
-            System.out.println("New Account Number: " + newAccountObject.getAccountNumber());
-            System.out.println("Type of Account: " + newAccountObject.getTypeOfAccount());
-            System.out.println("Balance : " + newAccountObject.getBalance());
+            newAccountObject = accountServices.createAccount(customerName, typeOfAccount, balance);
+//            System.out.println("Customer: " + newAccountObject.getCustomerName());
+//            System.out.println("New Account Number: " + newAccountObject.getAccountNumber());
+//            System.out.println("Type of Account: " + newAccountObject.getTypeOfAccount());
+//            System.out.println("Balance : " + newAccountObject.getBalance());
 
         }
         return newAccountObject;

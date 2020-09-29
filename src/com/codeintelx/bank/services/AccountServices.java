@@ -3,14 +3,19 @@ package com.codeintelx.bank.services;
 import com.codeintelx.bank.exceptions.AccountNotFoundException;
 import com.codeintelx.bank.exceptions.InsufficientFundsException;
 import com.codeintelx.bank.models.Account;
+import com.codeintelx.bank.repository.AccountsRepository;
 
+import javax.swing.text.View;
+import java.sql.SQLException;
 import java.util.*;
 
 
 public class AccountServices
 {
+    //Account newUserAccount;
+    AccountsRepository accountsRepository = new AccountsRepository();
 
-    private Map<String, Account> userAccounts = new HashMap<>();
+   // private Map<String, Account> userAccounts = new HashMap<>();
 
     public AccountServices()
     {
@@ -25,48 +30,53 @@ public class AccountServices
                 .substring(1, 11).replace("-", ""));
         Account newUserAccount = new Account(accountNumber, name, type, balance);
 
-        userAccounts.put(accountNumber, newUserAccount);
-
-
+        //userAccounts.put(accountNumber, newUserAccount);
+        try {
+            accountsRepository.createAccount(accountNumber, name, type, balance);
+        } catch (SQLException errorMessage) {
+            errorMessage.getMessage();
+        }
         return newUserAccount;
     }
 
 
 //Search Map for key and returns the accountNumber (key)
 
-    private Account searchAccount(String accountNumber) throws AccountNotFoundException
-    {
+    public Account searchAccount(String accountNumber) throws AccountNotFoundException, SQLException {
+        //Account newUserAccount = ;
 
-        if (!userAccounts.containsKey(accountNumber))
+      //return accountsRepository.searchUserAccount(accountNumber);
+
+        if (accountsRepository.searchUserAccount(accountNumber).contains(accountNumber))
         {
-            throw new AccountNotFoundException("Account not found, please enter another account number");
+            return newUserAccount;
         }
+//        throw new AccountNotFoundException("Account not found, please enter another account number");
 
-        return userAccounts.get(accountNumber);
+       // return userAccounts.get(accountNumber);
+        //return null;
+
 
     }
 
 //View Account input from the user
 
-    public Account viewUserAccount(String accountNumberFromUser) throws AccountNotFoundException
-    {
-        return searchAccount(accountNumberFromUser);
-    }
+//    public Account viewUserAccount(String accountNumberFromUser) throws AccountNotFoundException, SQLException {
+//        return searchAccount(accountNumberFromUser);
+//    }
 
 
 //Removes element from Map based on the key (account number) provided by the user
-    public void removeUserAccount(String accountNumberFromUser) throws AccountNotFoundException
-    {
-        userAccounts.remove(accountNumberFromUser);
+    public void removeUserAccount(String accountNumberFromUser) throws AccountNotFoundException, SQLException {
+        accountsRepository.removeUserAccount(accountNumberFromUser);
+        //userAccounts.remove(accountNumberFromUser);
     }
 
 //Deposits Funds
 
     public Account depositFunds(String accountNumberFromUser, long deposit)
-            throws AccountNotFoundException, InsufficientFundsException
-    {
-        Account newUserAccount;
-        newUserAccount = searchAccount(accountNumberFromUser);
+            throws AccountNotFoundException, InsufficientFundsException, SQLException {
+        Account newUserAccount = searchAccount(accountNumberFromUser);
 
         if (deposit < 0)
         {
@@ -74,10 +84,14 @@ public class AccountServices
         }
 
 //Adds deposit amount and updates balance
-        if (newUserAccount != null)
+        //if (newUserAccount != null)
+        else if(deposit>0)
         {
-            deposit += newUserAccount.getBalance();
-            newUserAccount.setBalance(deposit);
+
+                deposit = deposit + newUserAccount.getBalance();
+                newUserAccount.setBalance(deposit);
+                accountsRepository.depositFunds(accountNumberFromUser, deposit);
+
         }
 
         return newUserAccount;
@@ -87,8 +101,7 @@ public class AccountServices
 // Withdraw funds
 
     public Account withdrawFunds(String accountNumberFromUser, long withdraw)
-            throws InsufficientFundsException, AccountNotFoundException
-    {
+            throws InsufficientFundsException, AccountNotFoundException, SQLException {
 //Finds person via account number
 
         Account newUserAccount;
@@ -120,10 +133,16 @@ public class AccountServices
 
 //View all keys and information associated in the Map.
 
-    public Map<String, Account> viewAllAccountsInMap()
+    public void viewAllAccountsInDatabase() throws SQLException
     {
-        return userAccounts;
+     accountsRepository.searchAccounts();
     }
+
+
+
+//    public void accounts() throws SQLException {
+//        accountsRepository.searchAccounts(accountNumber);
+//    }
 
 
 }

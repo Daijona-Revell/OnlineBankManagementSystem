@@ -25,14 +25,15 @@
     <show-object-properties value="true" />
     <loaded-nodes>
       <connection connection-id="db53db9a-8579-4cfe-963f-db402aa3d918">
-        <schema name="OnlineBankManagementSystem" object-types="column, table, view" />
+        <schema name="OnlineBankManagement" object-types="view, table" />
+        <schema name="OnlineBankManagementSystem" object-types="view, column, function, table" />
       </connection>
     </loaded-nodes>
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="db53db9a-8579-4cfe-963f-db402aa3d918">
-      <console name="OnlineBankManagementSystem" type="STANDARD" schema="" session="Main">select * from `OnlineBankManagementSystem`.`Accounts`
-insert into `OnlineBankManagementSystem`.`Accounts`values ('1234567889', 'Munirr Sesay','Checking', 800.00);
+      <console name="OnlineBankManagementSystem" type="STANDARD" schema="OnlineBankManagementSystem" session="Main"><![CDATA[select * from `OnlineBankManagementSystem`.`Accounts`
+insert into `OnlineBankManagementSystem`.`Accounts`values ('1234567889', 'Munirr Sesay','Savings', 800.00);
 select * from `OnlineBankManagementSystem`.`Accounts`;
 select * from `OnlineBankManagementSystem`.`Accounts`;
 delete from `OnlineBankManagementSystem`.Accounts where customerName = customerName;
@@ -46,7 +47,11 @@ delete from `OnlineBankManagementSystem`.`Accounts` WHERE accountNumber = accou;
 
 delete from `OnlineBankManagementSystem`.`Accounts` WHERE accountNumber = accounts;
 select * from `OnlineBankManagementSystem`.`Accounts`
-delete from `OnlineBankManagementSystem`.`Accounts` WHERE typeOfAccount = typeOfAccount;</console>
+delete from `OnlineBankManagementSystem`.`Accounts` WHERE typeOfAccount = typeOfAccount;
+delete from `OnlineBankManagementSystem`.`Accounts` where customerName = 'Kid G';
+select * from `OnlineBankManagementSystem`.`Accounts`;
+Update `OnlineBankManagementSystem`.`Accounts` set `typeOfAccount` = 'Savings' where `accountNumber` = '0993695836';
+select * from `Accounts`;]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
@@ -105,7 +110,7 @@ delete from `OnlineBankManagementSystem`.`Accounts` WHERE typeOfAccount = typeOf
           <deprecated-pwd value="Q29kZWludGVseA==" />
         </database>
         <properties>
-          <auto-commit value="false" />
+          <auto-commit value="true" />
           <properties>
             <property key="serverTimezone" value="UTC" />
           </properties>
