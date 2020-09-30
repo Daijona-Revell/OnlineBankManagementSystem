@@ -14,31 +14,56 @@ public class AccountsRepository {
     List<Account> userAccounts = new ArrayList<>();
     Account accounts = new Account();
 
-    private void connectionAccounts(String sql) throws SQLException
-    {
-        // try {
+
+//    public AccountsRepository (String sql) throws SQLException {
+//        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/OnlineBankManagementSystem" +
+//                "?serverTimezone=UTC", "root", "Codeintelx");
+//        Statement statement = conn.createStatement();
+//        statement.execute(sql);
+//        if(sql.contains("Select")) {
+//
+//            ResultSet rs = statement.executeQuery(sql);
+//            while (rs.next()) {
+//                accounts.setAccountNumber(rs.getString(1));
+//                accounts.setCustomerName(rs.getString(2));
+//                accounts.setTypeOfAccount(rs.getString(3));
+//                accounts.setBalance(rs.getLong(4));
+//                userAccounts.add(accounts);
+//
+//            }
+//        }
+//
+//    }
+
+    private void connectionAccounts(String sql) throws SQLException {
+
         Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/OnlineBankManagementSystem" +
                 "?serverTimezone=UTC", "root", "Codeintelx");
         Statement statement = conn.createStatement();
         statement.execute(sql);
-        ResultSet rs = statement.executeQuery(sql);
-        while(rs.next())
-        {
-            accounts.setAccountNumber(rs.getString(1));
-            accounts.setCustomerName(rs.getString(2));
-            accounts.setTypeOfAccount(rs.getString(3));
-            accounts.setBalance(rs.getLong(4));
-//
-            userAccounts.add(accounts);
-        }
+        if (sql.contains("Select")) {
 
+            ResultSet rs = statement.executeQuery(sql);
+            while (rs.next()) {
+                accounts.setAccountNumber(rs.getString(1));
+                accounts.setCustomerName(rs.getString(2));
+                accounts.setTypeOfAccount(rs.getString(3));
+                accounts.setBalance(rs.getLong(4));
+                userAccounts.add(accounts);
+
+                System.out.println((rs.getString(1) + " " +
+                        rs.getString(2) + " " + rs.getString(3) + " " +
+                    rs.getLong(4)));
+
+            }
+        }
+       // return accounts;
 
     }
 
 
     public Account createAccount(String accountNumber, String customerName, String typeOfAccount, long balance)
-            throws SQLException
-    {
+            throws SQLException {
 
         String sql = ("Insert Into Accounts Values('" + accountNumber + "','" + customerName + "','"
                 + typeOfAccount + "','" + balance + "')");
@@ -49,9 +74,8 @@ public class AccountsRepository {
 
     }
 
-    //
-    public Account searchUserAccount(String accountNumberFromUser) throws SQLException {
 
+    public Account searchUserAccount(String accountNumberFromUser) throws SQLException, AccountNotFoundException {
 
         String sql = ("Select * from Accounts Where accountNumber = '" + accountNumberFromUser + "'");
         connectionAccounts(sql);
@@ -61,22 +85,20 @@ public class AccountsRepository {
     }
 
     public Account depositFunds(String accountNumberFromUser, long deposit)
-            throws SQLException
-    {
+            throws SQLException {
 
-            String sql = ("Update Accounts set balance = '" + deposit + "' where accountNumber = '"
-                    + accountNumberFromUser + "'");
-            connectionAccounts(sql);
+        String sql = ("Update Accounts set balance = '" + deposit + "' where accountNumber = '"
+                + accountNumberFromUser + "'");
+        connectionAccounts(sql);
         return accounts;
-        }
+    }
 
-        //
+    //
 //
 //// Withdraw funds
 //
     public Account withdrawFunds(String accountNumberFromUser, long withdrawNewBalance)
-            throws SQLException
-    {
+            throws SQLException {
 
         String sql = ("Update Accounts set balance = '" + withdrawNewBalance + "' where accountNumber = '"
                 + accountNumberFromUser + "'");
@@ -85,36 +107,42 @@ public class AccountsRepository {
         return accounts;
     }
 
-//
-        public void removeUserAccount (String accountNumberFromUser) throws SQLException
-        {
+    //
+    public Account removeUserAccount(String accountNumberFromUser) throws SQLException {
 
-            String sql = ("Delete from Accounts where accountNumber = '" + accountNumberFromUser + "'");
-            connectionAccounts(sql);
+        String sql = ("Delete from Accounts where accountNumber = '" + accountNumberFromUser + "'");
+        connectionAccounts(sql);
+        return accounts;
 
-        }
-
-
-
-        public void searchAccounts() throws SQLException
-        {
-
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/OnlineBankManagementSystem" +
-                    "?serverTimezone=UTC", "root", "Codeintelx");
-            Statement statement = conn.createStatement();
-            ResultSet rs = statement.executeQuery("Select * from Accounts");
-
-            while (rs.next()) {
-                //return ;
-                //Account newAccounts = new Account
-                System.out.println((rs.getString(1) + " " +
-                        rs.getString(2) + " " + rs.getString(3) + " " +
-                        rs.getLong(4)));
-                // userAccounts.add(newAccounts);
-            }
-           // return accounts;
-        }
     }
+
+
+    public void searchAccounts() throws SQLException {
+
+        String sql = ("Select * from Accounts");
+        connectionAccounts(sql);
+
+
+
+
+
+//        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/OnlineBankManagementSystem" +
+//                "?serverTimezone=UTC", "root", "Codeintelx");
+//        Statement statement = conn.createStatement();
+//        ResultSet rs = statement.executeQuery("Select * from Accounts");
+
+//        while (rs.next()) {
+//            return accounts;
+//            //return ;
+//            //Account newAccounts = new Account
+////            System.out.println((rs.getString(1) + " " +
+////                    rs.getString(2) + " " + rs.getString(3) + " " +
+////                    rs.getLong(4)));
+//            // userAccounts.add(newAccounts);
+//        }
+        // return accounts;
+    }
+}
 
 
 

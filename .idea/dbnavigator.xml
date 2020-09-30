@@ -26,7 +26,7 @@
     <loaded-nodes>
       <connection connection-id="db53db9a-8579-4cfe-963f-db402aa3d918">
         <schema name="OnlineBankManagement" object-types="view, table" />
-        <schema name="OnlineBankManagementSystem" object-types="column, view, table, function" />
+        <schema name="OnlineBankManagementSystem" object-types="function, view, column, table" />
       </connection>
     </loaded-nodes>
   </component>

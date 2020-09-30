@@ -8,8 +8,7 @@ import com.codeintelx.bank.services.AccountServices;
 import java.sql.SQLException;
 import java.util.*;
 
-public class Main
-{
+public class Main {
     public static AccountServices accountServices = new AccountServices();
 
     public static Scanner scanner = new Scanner(System.in);
@@ -17,8 +16,7 @@ public class Main
     static Account newAccountObject;
 
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
 
         boolean quit = false;
 
@@ -38,8 +36,7 @@ public class Main
             int action = scanner.nextInt();
             scanner.nextLine();
 
-            switch (action)
-            {
+            switch (action) {
                 case 1:
                     createAccount();
 
@@ -50,12 +47,11 @@ public class Main
                     System.out.println("Please enter Account number");
                     accountNumberFromUser = scanner.next();
                     try {
-                        newAccountObject = accountServices.searchAccount(accountNumberFromUser);
-                        System.out.println("Customer: " + newAccountObject.getCustomerName());
-                        System.out.println("Type of Account: " + newAccountObject.getTypeOfAccount());
-                        System.out.println("Balance : " + newAccountObject.getBalance());
-                    } catch(AccountNotFoundException | SQLException errorMessage)
-                    {
+                         accountServices.searchAccount(accountNumberFromUser);
+//                        System.out.println("Customer: " + newAccountObject.getCustomerName());
+//                        System.out.println("Type of Account: " + newAccountObject.getTypeOfAccount());
+//                        System.out.println("Balance : " + newAccountObject.getBalance());
+                    } catch (AccountNotFoundException | SQLException errorMessage) {
                         System.out.println(errorMessage.getMessage());
                     }
 
@@ -68,13 +64,10 @@ public class Main
                     accountNumberFromUser = scanner.next();
                     System.out.println("How much money do you want to withdraw?");
                     long withdraw = scanner.nextLong();
-                    try
-                    {
+                    try {
                         newAccountObject = accountServices.withdrawFunds(accountNumberFromUser, withdraw);
                         System.out.println("New Balance: " + newAccountObject.getBalance());
-                    }
-                    catch (AccountNotFoundException | InsufficientFundsException | SQLException errorMessage)
-                    {
+                    } catch (AccountNotFoundException | InsufficientFundsException | SQLException errorMessage) {
                         System.out.println(errorMessage.getMessage());
                     }
 
@@ -88,13 +81,10 @@ public class Main
                     System.out.println("How much do you want to deposit?");
                     long deposit = scanner.nextLong();
 
-                    try
-                    {
+                    try {
                         newAccountObject = accountServices.depositFunds(accountNumberFromUser, deposit);
                         System.out.println("New Balance: " + newAccountObject.getBalance());
-                    }
-                    catch (InsufficientFundsException | AccountNotFoundException| SQLException errorMessage)
-                    {
+                    } catch (InsufficientFundsException | AccountNotFoundException | SQLException errorMessage) {
                         System.out.println(errorMessage.getMessage());
                     }
 
@@ -106,10 +96,9 @@ public class Main
                     accountNumberFromUser = scanner.next();
                     try {
 
-                        accountServices.removeUserAccount(accountNumberFromUser);
-                        System.out.println("This account will be removed: " + accountNumberFromUser);
-                    } catch(SQLException | AccountNotFoundException errorMessage)
-                    {
+                        newAccountObject = accountServices.removeUserAccount(accountNumberFromUser);
+                        System.out.println("This account will be removed: " + newAccountObject.getCustomerName());
+                    } catch (SQLException | AccountNotFoundException errorMessage) {
                         System.out.println(errorMessage.getMessage());
                     }
 
@@ -118,22 +107,11 @@ public class Main
 
                 case 6:
                     try {
-                        accountServices.viewAllAccountsInDatabase();
+                       accountServices.viewAllAccountsInDatabase();
                         //System.out.println(newAccountObject.getCustomerName() + newAccountObject.getBalance());
-                    }catch (SQLException errorMessage)
-                    {
+                    } catch (SQLException errorMessage) {
                         System.out.println(errorMessage.getMessage());
                     }
-//                    for(Map.Entry<String, Account> entry : accountServices.viewAllAccountsInMap().entrySet())
-//                    {
-//                        System.out.println("Account Number: " + entry.getKey()
-//                                + "\nCustomer Name: " + entry.getValue().getCustomerName()
-//                                + "\nType Of Account: " + entry.getValue().getTypeOfAccount()
-//                                + "\nBalance: " + entry.getValue().getBalance()
-//                                + "\n");
-//                    }
-                       // accountServices.viewAllAccountsInMap();
-
 
                     break;
 
@@ -151,8 +129,7 @@ public class Main
 
     }
 
-    public static Account createAccount()
-    {
+    public static Account createAccount() {
 
         System.out.println("Your account will be created, Please enter Name: ");
         String customerName = scanner.nextLine();
@@ -160,8 +137,7 @@ public class Main
         System.out.println("Which account would you like to access? (Checking or Savings)");
         String typeOfAccount = scanner.next();
 
-        if (typeOfAccount.equals("Checking"))
-        {
+        if (typeOfAccount.equals("Checking")) {
             System.out.println("Checking account created:");
             System.out.println("How much money will you input?");
             long balance = scanner.nextLong();
@@ -172,9 +148,7 @@ public class Main
             System.out.println("Type of Account: " + newAccountObject.getTypeOfAccount());
             System.out.println("Balance : " + newAccountObject.getBalance());
 
-        }
-        else if (typeOfAccount.equals("Savings"))
-        {
+        } else if (typeOfAccount.equals("Savings")) {
             System.out.println("Saving account created:");
             System.out.println("How much money will you input?");
             long balance = scanner.nextLong();

@@ -12,17 +12,15 @@ import java.util.*;
 
 public class AccountServices
 {
-    //Account newUserAccount;
-    AccountsRepository accountsRepository = new AccountsRepository();
 
-   // private Map<String, Account> userAccounts = new HashMap<>();
+    AccountsRepository accountsRepository = new AccountsRepository();
 
     public AccountServices()
     {
 
     }
 
-//Adds customer to Map and returns the account information.
+//Adds customer to Database and returns the account information.
     public Account createAccount(String name, String type, long balance)
     {
         UUID uuid = UUID.randomUUID();
@@ -30,7 +28,6 @@ public class AccountServices
                 .substring(1, 11).replace("-", ""));
         Account newUserAccount = new Account(accountNumber, name, type, balance);
 
-        //userAccounts.put(accountNumber, newUserAccount);
         try {
             accountsRepository.createAccount(accountNumber, name, type, balance);
         } catch (SQLException errorMessage) {
@@ -40,28 +37,28 @@ public class AccountServices
     }
 
 
-//Search Map for key and returns the accountNumber (key)
+//Search Database for key and returns the accountNumber (key)
 
     public Account searchAccount(String accountNumber) throws AccountNotFoundException, SQLException {
 
         //System.out.println(newUserAccount.getCustomerName());
+        if(accountsRepository.searchUserAccount(accountNumber).getAccountNumber()== null)
+        {
+            throw new AccountNotFoundException("Account not found. Try again");
+        }
+
        return accountsRepository.searchUserAccount(accountNumber);
 
 
 
     }
 
-//View Account input from the user
 
-//    public Account viewUserAccount(String accountNumberFromUser) throws AccountNotFoundException, SQLException {
-//        return searchAccount(accountNumberFromUser);
-//    }
-
-
-//Removes element from Map based on the key (account number) provided by the user
-    public void removeUserAccount(String accountNumberFromUser) throws AccountNotFoundException, SQLException {
+//Removes element from Database based on the key (account number) provided by the user
+    public Account removeUserAccount(String accountNumberFromUser) throws AccountNotFoundException, SQLException {
+        Account newUserAccount = searchAccount(accountNumberFromUser);
         accountsRepository.removeUserAccount(accountNumberFromUser);
-        //userAccounts.remove(accountNumberFromUser);
+        return newUserAccount;
     }
 
 //Deposits Funds
@@ -79,13 +76,9 @@ public class AccountServices
         //if (newUserAccount != null)
         else if(deposit>0)
         {
-            //System.out.println("Deposit");
-
                 deposit = deposit + newUserAccount.getBalance();
                 newUserAccount.setBalance(deposit);
-               return accountsRepository.depositFunds(accountNumberFromUser, deposit);
-            //System.out.println(newUserAccount.getBalance());
-                //return newUserAccount;
+                accountsRepository.depositFunds(accountNumberFromUser, deposit);
 
         }
 
@@ -130,14 +123,9 @@ public class AccountServices
 
     public void viewAllAccountsInDatabase() throws SQLException
     {
-      accountsRepository.searchAccounts();
+       accountsRepository.searchAccounts();
     }
 
-
-
-//    public void accounts() throws SQLException {
-//        accountsRepository.searchAccounts(accountNumber);
-//    }
 
 
 }
