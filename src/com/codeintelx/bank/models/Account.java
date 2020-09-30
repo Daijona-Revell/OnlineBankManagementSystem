@@ -8,6 +8,11 @@ public class Account
     private String customerName;
     private String typeOfAccount;
 
+    public Account()
+    {
+
+    }
+
     public Account(String accountNumber, String customerName, String typeOfAccount, long balance)
     {
         this.accountNumber = accountNumber;
@@ -41,4 +46,16 @@ public class Account
         return typeOfAccount;
     }
 
+
+    public void setAccountNumber(String accountNumber) {
+        this.accountNumber = accountNumber;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+
+    public void setTypeOfAccount(String typeOfAccount) {
+        this.typeOfAccount = typeOfAccount;
+    }
 }

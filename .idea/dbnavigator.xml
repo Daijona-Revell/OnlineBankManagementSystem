@@ -26,13 +26,13 @@
     <loaded-nodes>
       <connection connection-id="db53db9a-8579-4cfe-963f-db402aa3d918">
         <schema name="OnlineBankManagement" object-types="view, table" />
-        <schema name="OnlineBankManagementSystem" object-types="view, column, function, table" />
+        <schema name="OnlineBankManagementSystem" object-types="column, view, table, function" />
       </connection>
     </loaded-nodes>
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="db53db9a-8579-4cfe-963f-db402aa3d918">
-      <console name="OnlineBankManagementSystem" type="STANDARD" schema="OnlineBankManagementSystem" session="Main"><![CDATA[select * from `OnlineBankManagementSystem`.`Accounts`
+      <console name="OnlineBankManagementSystem" type="STANDARD" schema="OnlineBankManagementSystem" session="Main">select * from `OnlineBankManagementSystem`.`Accounts`
 insert into `OnlineBankManagementSystem`.`Accounts`values ('1234567889', 'Munirr Sesay','Savings', 800.00);
 select * from `OnlineBankManagementSystem`.`Accounts`;
 select * from `OnlineBankManagementSystem`.`Accounts`;
@@ -51,7 +51,7 @@ delete from `OnlineBankManagementSystem`.`Accounts` WHERE typeOfAccount = typeOf
 delete from `OnlineBankManagementSystem`.`Accounts` where customerName = 'Kid G';
 select * from `OnlineBankManagementSystem`.`Accounts`;
 Update `OnlineBankManagementSystem`.`Accounts` set `typeOfAccount` = 'Savings' where `accountNumber` = '0993695836';
-select * from `Accounts`;]]></console>
+select * from `Accounts`;</console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">

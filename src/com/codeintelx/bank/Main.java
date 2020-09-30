@@ -73,16 +73,11 @@ public class Main
                         newAccountObject = accountServices.withdrawFunds(accountNumberFromUser, withdraw);
                         System.out.println("New Balance: " + newAccountObject.getBalance());
                     }
-                    catch (AccountNotFoundException e)
-                    {
-                        System.out.println(e.getMessage());
-                    }
-                    catch (InsufficientFundsException errorMessage)
+                    catch (AccountNotFoundException | InsufficientFundsException | SQLException errorMessage)
                     {
                         System.out.println(errorMessage.getMessage());
-                    } catch (SQLException errorMessage) {
-                        errorMessage.getMessage();
                     }
+
 
                     break;
 
@@ -98,17 +93,11 @@ public class Main
                         newAccountObject = accountServices.depositFunds(accountNumberFromUser, deposit);
                         System.out.println("New Balance: " + newAccountObject.getBalance());
                     }
-                    catch (InsufficientFundsException errorMessage)
+                    catch (InsufficientFundsException | AccountNotFoundException| SQLException errorMessage)
                     {
                         System.out.println(errorMessage.getMessage());
                     }
-                    catch (AccountNotFoundException e)
-                    {
-                        System.out.println(e.getMessage());
 
-                    } catch (SQLException errorMessage) {
-                        errorMessage.getMessage();
-                    }
 
                     break;
 
@@ -125,12 +114,12 @@ public class Main
                     }
 
 
-
                     break;
 
                 case 6:
                     try {
                         accountServices.viewAllAccountsInDatabase();
+                        //System.out.println(newAccountObject.getCustomerName() + newAccountObject.getBalance());
                     }catch (SQLException errorMessage)
                     {
                         System.out.println(errorMessage.getMessage());
@@ -178,10 +167,10 @@ public class Main
             long balance = scanner.nextLong();
             System.out.println("New customer added: ");
             newAccountObject = accountServices.createAccount(customerName, typeOfAccount, balance);
-//            System.out.println("Customer: " + newAccountObject.getCustomerName());
-//            System.out.println("New Account Number: " + newAccountObject.getAccountNumber());
-//            System.out.println("Type of Account: " + newAccountObject.getTypeOfAccount());
-//            System.out.println("Balance : " + newAccountObject.getBalance());
+            System.out.println("Customer: " + newAccountObject.getCustomerName());
+            System.out.println("New Account Number: " + newAccountObject.getAccountNumber());
+            System.out.println("Type of Account: " + newAccountObject.getTypeOfAccount());
+            System.out.println("Balance : " + newAccountObject.getBalance());
 
         }
         else if (typeOfAccount.equals("Savings"))
@@ -192,10 +181,10 @@ public class Main
             System.out.println("New customer added: ");
 
             newAccountObject = accountServices.createAccount(customerName, typeOfAccount, balance);
-//            System.out.println("Customer: " + newAccountObject.getCustomerName());
-//            System.out.println("New Account Number: " + newAccountObject.getAccountNumber());
-//            System.out.println("Type of Account: " + newAccountObject.getTypeOfAccount());
-//            System.out.println("Balance : " + newAccountObject.getBalance());
+            System.out.println("Customer: " + newAccountObject.getCustomerName());
+            System.out.println("New Account Number: " + newAccountObject.getAccountNumber());
+            System.out.println("Type of Account: " + newAccountObject.getTypeOfAccount());
+            System.out.println("Balance : " + newAccountObject.getBalance());
 
         }
         return newAccountObject;

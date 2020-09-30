@@ -43,18 +43,10 @@ public class AccountServices
 //Search Map for key and returns the accountNumber (key)
 
     public Account searchAccount(String accountNumber) throws AccountNotFoundException, SQLException {
-        //Account newUserAccount = ;
 
-      //return accountsRepository.searchUserAccount(accountNumber);
+        //System.out.println(newUserAccount.getCustomerName());
+       return accountsRepository.searchUserAccount(accountNumber);
 
-        if (accountsRepository.searchUserAccount(accountNumber).contains(accountNumber))
-        {
-            return newUserAccount;
-        }
-//        throw new AccountNotFoundException("Account not found, please enter another account number");
-
-       // return userAccounts.get(accountNumber);
-        //return null;
 
 
     }
@@ -87,10 +79,13 @@ public class AccountServices
         //if (newUserAccount != null)
         else if(deposit>0)
         {
+            //System.out.println("Deposit");
 
                 deposit = deposit + newUserAccount.getBalance();
                 newUserAccount.setBalance(deposit);
-                accountsRepository.depositFunds(accountNumberFromUser, deposit);
+               return accountsRepository.depositFunds(accountNumberFromUser, deposit);
+            //System.out.println(newUserAccount.getBalance());
+                //return newUserAccount;
 
         }
 
@@ -104,9 +99,8 @@ public class AccountServices
             throws InsufficientFundsException, AccountNotFoundException, SQLException {
 //Finds person via account number
 
-        Account newUserAccount;
-        newUserAccount = searchAccount(accountNumberFromUser);
-
+        Account newUserAccount = searchAccount(accountNumberFromUser);
+//
         if (withdraw < 0)
         {
             throw new InsufficientFundsException("You cannot enter a negative number, please try again.");
@@ -119,6 +113,7 @@ public class AccountServices
             if (newBalance >= 0)
             {
                 newUserAccount.setBalance(newBalance);
+                return accountsRepository.withdrawFunds(accountNumberFromUser, newBalance);
             }
             else if ((newBalance < 0))
             {
@@ -127,7 +122,7 @@ public class AccountServices
             }
 
         }
-
+//
         return newUserAccount;
     }
 
@@ -135,7 +130,7 @@ public class AccountServices
 
     public void viewAllAccountsInDatabase() throws SQLException
     {
-     accountsRepository.searchAccounts();
+      accountsRepository.searchAccounts();
     }
 
 
