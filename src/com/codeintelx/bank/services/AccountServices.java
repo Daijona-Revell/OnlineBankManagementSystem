@@ -106,7 +106,7 @@ public class AccountServices
             if (newBalance >= 0)
             {
                 newUserAccount.setBalance(newBalance);
-                return accountsRepository.withdrawFunds(accountNumberFromUser, newBalance);
+                accountsRepository.withdrawFunds(accountNumberFromUser, newBalance);
             }
             else if ((newBalance < 0))
             {
@@ -121,9 +121,9 @@ public class AccountServices
 
 //View all keys and information associated in the Map.
 
-    public void viewAllAccountsInDatabase() throws SQLException
+    public List<Account> viewAllAccountsInDatabase() throws SQLException
     {
-       accountsRepository.searchAccounts();
+       return accountsRepository.searchAccounts();
     }
 
 

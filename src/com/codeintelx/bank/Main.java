@@ -107,7 +107,12 @@ public class Main {
 
                 case 6:
                     try {
-                       accountServices.viewAllAccountsInDatabase();
+                       for(int i = 0; i < accountServices.viewAllAccountsInDatabase().size(); i++)
+                       {
+                           System.out.println(accountServices.viewAllAccountsInDatabase().get(i).getCustomerName());
+                       }
+                       //List<Account> userAccounts = newAccountObject.getCustomerName();
+                        //System.out.println(newAccountObject.getCustomerName());
                         //System.out.println(newAccountObject.getCustomerName() + newAccountObject.getBalance());
                     } catch (SQLException errorMessage) {
                         System.out.println(errorMessage.getMessage());
