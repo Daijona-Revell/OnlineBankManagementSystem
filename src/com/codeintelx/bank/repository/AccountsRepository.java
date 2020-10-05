@@ -14,7 +14,7 @@ public class AccountsRepository {
 //get rid of this expeditiously
 //    private void connectionAccounts(String sql) throws SQLException {
 //
-//        //Connection conn = DatabaseConnection.getInstance().getConnection();
+//Connection conn = DatabaseConnection.getInstance().getConnection().createStatement();
 //        Statement statement = DatabaseConnection.getInstance().getConnection().createStatement();
 //        statement.execute(sql);
 //        if (sql.contains("Select")) {
@@ -42,7 +42,7 @@ public class AccountsRepository {
             throws SQLException {
         Statement statement = DatabaseConnection.getInstance().getConnection().createStatement();
 
-        statement.execute ("Insert Into Accounts Values('" + accountNumber + "','" + customerName + "','"
+        statement.execute("Insert Into Accounts Values('" + accountNumber + "','" + customerName + "','"
                 + typeOfAccount + "','" + balance + "')");
         //connectionAccounts(sql);
         System.out.println("Entered into database");
@@ -59,14 +59,14 @@ public class AccountsRepository {
         Account accounts = new Account();
 
         //statement.executeQuery(("Select * from Accounts Where accountNumber = '" + accountNumberFromUser + "'");
-        List<Account> userAccounts = new ArrayList<>();
+        //List<Account> userAccounts = new ArrayList<>();
         ResultSet rs = statement.executeQuery("Select * from Accounts Where accountNumber = '" + accountNumberFromUser + "'");
             while (rs.next()) {
                 accounts.setAccountNumber(rs.getString(1));
                 accounts.setCustomerName(rs.getString(2));
                 accounts.setTypeOfAccount(rs.getString(3));
                 accounts.setBalance(rs.getLong(4));
-                userAccounts.add(accounts);
+                //userAccounts.add(accounts);
             }
 
         return accounts;

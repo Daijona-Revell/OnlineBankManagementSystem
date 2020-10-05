@@ -40,16 +40,15 @@ public class AccountServices
 //Search Database for key and returns the accountNumber (key)
 
     public Account searchAccount(String accountNumber) throws AccountNotFoundException, SQLException {
+        Account newUserAccount = accountsRepository.searchUserAccount(accountNumber);
 
         //System.out.println(newUserAccount.getCustomerName());
-        if(accountsRepository.searchUserAccount(accountNumber).getAccountNumber()== null)
+        if(newUserAccount.getAccountNumber()== null)
         {
             throw new AccountNotFoundException("Account not found. Try again");
         }
 
-       return accountsRepository.searchUserAccount(accountNumber);
-
-
+       return newUserAccount;
 
     }
 

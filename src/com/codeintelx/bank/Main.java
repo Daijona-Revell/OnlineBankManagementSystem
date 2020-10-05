@@ -47,8 +47,11 @@ public class Main {
                     System.out.println("Please enter Account number");
                     accountNumberFromUser = scanner.next();
                     try {
-                         accountServices.searchAccount(accountNumberFromUser);
-//                        System.out.println("Customer: " + newAccountObject.getCustomerName());
+                        newAccountObject = accountServices.searchAccount(accountNumberFromUser);
+                        System.out.println("Account Number " + newAccountObject.getAccountNumber());
+                        System.out.println("Customer Name: " + newAccountObject.getCustomerName());
+                        System.out.println("Type Of Account: " + newAccountObject.getTypeOfAccount());
+                        System.out.println("Balance: " + newAccountObject.getBalance());
 //                        System.out.println("Type of Account: " + newAccountObject.getTypeOfAccount());
 //                        System.out.println("Balance : " + newAccountObject.getBalance());
                     } catch (AccountNotFoundException | SQLException errorMessage) {
@@ -109,7 +112,10 @@ public class Main {
                     try {
                        for(int i = 0; i < accountServices.viewAllAccountsInDatabase().size(); i++)
                        {
-                           System.out.println(accountServices.viewAllAccountsInDatabase().get(i).getCustomerName());
+                           System.out.println("Account Number:" + accountServices.viewAllAccountsInDatabase().get(i).getAccountNumber());
+                           System.out.println("Customer Name:" + accountServices.viewAllAccountsInDatabase().get(i).getCustomerName());
+                           System.out.println("Type Of Account:" + accountServices.viewAllAccountsInDatabase().get(i).getTypeOfAccount());
+                           System.out.println("Balance:" + accountServices.viewAllAccountsInDatabase().get(i).getBalance()+ "\n");
                        }
                        //List<Account> userAccounts = newAccountObject.getCustomerName();
                         //System.out.println(newAccountObject.getCustomerName());
