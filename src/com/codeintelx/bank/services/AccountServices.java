@@ -42,7 +42,6 @@ public class AccountServices
     public Account searchAccount(String accountNumber) throws AccountNotFoundException, SQLException {
         Account newUserAccount = accountsRepository.searchUserAccount(accountNumber);
 
-        //System.out.println(newUserAccount.getCustomerName());
         if(newUserAccount.getAccountNumber()== null)
         {
             throw new AccountNotFoundException("Account not found. Try again");

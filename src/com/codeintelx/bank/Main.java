@@ -52,8 +52,6 @@ public class Main {
                         System.out.println("Customer Name: " + newAccountObject.getCustomerName());
                         System.out.println("Type Of Account: " + newAccountObject.getTypeOfAccount());
                         System.out.println("Balance: " + newAccountObject.getBalance());
-//                        System.out.println("Type of Account: " + newAccountObject.getTypeOfAccount());
-//                        System.out.println("Balance : " + newAccountObject.getBalance());
                     } catch (AccountNotFoundException | SQLException errorMessage) {
                         System.out.println(errorMessage.getMessage());
                     }
@@ -105,7 +103,6 @@ public class Main {
                         System.out.println(errorMessage.getMessage());
                     }
 
-
                     break;
 
                 case 6:
@@ -117,9 +114,7 @@ public class Main {
                            System.out.println("Type Of Account:" + accountServices.viewAllAccountsInDatabase().get(i).getTypeOfAccount());
                            System.out.println("Balance:" + accountServices.viewAllAccountsInDatabase().get(i).getBalance()+ "\n");
                        }
-                       //List<Account> userAccounts = newAccountObject.getCustomerName();
-                        //System.out.println(newAccountObject.getCustomerName());
-                        //System.out.println(newAccountObject.getCustomerName() + newAccountObject.getBalance());
+
                     } catch (SQLException errorMessage) {
                         System.out.println(errorMessage.getMessage());
                     }
