@@ -5,7 +5,6 @@ import com.codeintelx.bank.exceptions.InsufficientFundsException;
 import com.codeintelx.bank.models.Account;
 import com.codeintelx.bank.repository.AccountsRepository;
 
-import javax.swing.text.View;
 import java.sql.SQLException;
 import java.util.*;
 
@@ -21,7 +20,7 @@ public class AccountServices
     }
 
 //Adds customer to Database and returns the account information.
-    public Account createAccount(String name, String type, long balance)
+    public Account createAccount(String name, String type, double balance)
     {
         UUID uuid = UUID.randomUUID();
         String accountNumber = (Long.toString(uuid.randomUUID().getMostSignificantBits())
@@ -37,7 +36,7 @@ public class AccountServices
     }
 
 
-//Search Database for key and returns the accountNumber (key)
+//Search Database for key and returns the accountNumber
 
     public Account searchAccount(String accountNumber) throws AccountNotFoundException, SQLException {
         Account newUserAccount = accountsRepository.searchUserAccount(accountNumber);
@@ -61,7 +60,7 @@ public class AccountServices
 
 //Deposits Funds
 
-    public Account depositFunds(String accountNumberFromUser, long deposit)
+    public Account depositFunds(String accountNumberFromUser, double deposit)
             throws AccountNotFoundException, InsufficientFundsException, SQLException {
         Account newUserAccount = searchAccount(accountNumberFromUser);
 
@@ -86,7 +85,7 @@ public class AccountServices
 
 // Withdraw funds
 
-    public Account withdrawFunds(String accountNumberFromUser, long withdraw)
+    public Account withdrawFunds(String accountNumberFromUser, double withdraw)
             throws InsufficientFundsException, AccountNotFoundException, SQLException {
 //Finds person via account number
 
@@ -99,7 +98,7 @@ public class AccountServices
         else if (newUserAccount != null)
         {
 //Sets new Balance in newBalance
-            long newBalance = (newUserAccount.getBalance() - withdraw);
+            double newBalance = (newUserAccount.getBalance() - withdraw);
 //Sets new balance in the Map
             if (newBalance >= 0)
             {

@@ -11,7 +11,7 @@ import java.util.List;
 public class AccountsRepository {
 
 
-    public void createAccount(String accountNumber, String customerName, String typeOfAccount, long balance)
+    public void createAccount(String accountNumber, String customerName, String typeOfAccount, double balance)
             throws SQLException {
         Statement statement = DatabaseConnection.getInstance().getConnection().createStatement();
 
@@ -21,7 +21,7 @@ public class AccountsRepository {
     }
 
 
-    public Account searchUserAccount(String accountNumberFromUser) throws SQLException, AccountNotFoundException {
+    public Account searchUserAccount(String accountNumberFromUser) throws SQLException {
         Statement statement = DatabaseConnection.getInstance().getConnection().createStatement();
         Account accounts = new Account();
 
@@ -30,7 +30,7 @@ public class AccountsRepository {
                 accounts.setAccountNumber(rs.getString(1));
                 accounts.setCustomerName(rs.getString(2));
                 accounts.setTypeOfAccount(rs.getString(3));
-                accounts.setBalance(rs.getLong(4));
+                accounts.setBalance(rs.getDouble(4));
             }
 
         return accounts;
@@ -38,7 +38,7 @@ public class AccountsRepository {
     }
 //// Deposit funds from User in Database
 
-    public void depositFunds(String accountNumberFromUser, long deposit)
+    public void depositFunds(String accountNumberFromUser, double deposit)
             throws SQLException {
         Statement statement = DatabaseConnection.getInstance().getConnection().createStatement();
 
@@ -50,7 +50,7 @@ public class AccountsRepository {
 
 //// Withdraw funds from User in Database
 
-    public void withdrawFunds(String accountNumberFromUser, long withdrawNewBalance)
+    public void withdrawFunds(String accountNumberFromUser, double withdrawNewBalance)
             throws SQLException {
         Statement statement = DatabaseConnection.getInstance().getConnection().createStatement();
 
@@ -77,7 +77,7 @@ public class AccountsRepository {
             accounts.setAccountNumber(rs.getString(1));
             accounts.setCustomerName(rs.getString(2));
             accounts.setTypeOfAccount(rs.getString(3));
-            accounts.setBalance(rs.getLong(4));
+            accounts.setBalance(rs.getDouble(4));
             userAccounts.add(accounts);
         }
         return userAccounts;

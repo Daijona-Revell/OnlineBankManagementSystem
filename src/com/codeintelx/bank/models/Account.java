@@ -4,7 +4,7 @@ public class Account
 {
 
     private String accountNumber;
-    private long balance;
+    private double balance;
     private String customerName;
     private String typeOfAccount;
 
@@ -13,7 +13,7 @@ public class Account
 
     }
 
-    public Account(String accountNumber, String customerName, String typeOfAccount, long balance)
+    public Account(String accountNumber, String customerName, String typeOfAccount, double balance)
     {
         this.accountNumber = accountNumber;
         this.customerName = customerName;
@@ -26,12 +26,12 @@ public class Account
         return accountNumber;
     }
 
-    public long getBalance()
+    public double getBalance()
     {
         return balance;
     }
 
-    public void setBalance(long balance)
+    public void setBalance(double balance)
     {
         this.balance = balance;
     }

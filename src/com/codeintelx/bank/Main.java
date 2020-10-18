@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.*;
 
 public class Main {
+
     public static AccountServices accountServices = new AccountServices();
 
     public static Scanner scanner = new Scanner(System.in);
@@ -17,6 +18,7 @@ public class Main {
 
 
     public static void main(String[] args) {
+
 
         boolean quit = false;
 
@@ -56,7 +58,6 @@ public class Main {
                         System.out.println(errorMessage.getMessage());
                     }
 
-
                     break;
 
                 case 3:
@@ -64,7 +65,7 @@ public class Main {
                     System.out.println("Please enter Account Number");
                     accountNumberFromUser = scanner.next();
                     System.out.println("How much money do you want to withdraw?");
-                    long withdraw = scanner.nextLong();
+                    double withdraw = scanner.nextDouble(); //Double.parseDouble(df.format(scanner.nextDouble()));
                     try {
                         newAccountObject = accountServices.withdrawFunds(accountNumberFromUser, withdraw);
                         System.out.println("New Balance: " + newAccountObject.getBalance());
@@ -72,15 +73,14 @@ public class Main {
                         System.out.println(errorMessage.getMessage());
                     }
 
-
                     break;
 
                 case 4:
-//
+
                     System.out.println("Please enter Account Number");
                     accountNumberFromUser = scanner.next();
                     System.out.println("How much do you want to deposit?");
-                    long deposit = scanner.nextLong();
+                    double deposit = scanner.nextDouble(); //Double.parseDouble(df.format(scanner.nextDouble()));
 
                     try {
                         newAccountObject = accountServices.depositFunds(accountNumberFromUser, deposit);
@@ -146,7 +146,7 @@ public class Main {
         if (typeOfAccount.equals("Checking")) {
             System.out.println("Checking account created:");
             System.out.println("How much money will you input?");
-            long balance = scanner.nextLong();
+            double balance = scanner.nextDouble();//Double.parseDouble(df.format(scanner.nextDouble()));
             System.out.println("New customer added: ");
             newAccountObject = accountServices.createAccount(customerName, typeOfAccount, balance);
             System.out.println("Customer: " + newAccountObject.getCustomerName());
@@ -157,7 +157,7 @@ public class Main {
         } else if (typeOfAccount.equals("Savings")) {
             System.out.println("Saving account created:");
             System.out.println("How much money will you input?");
-            long balance = scanner.nextLong();
+            double balance = scanner.nextDouble();//Double.parseDouble(df.format(scanner.nextDouble()));
             System.out.println("New customer added: ");
 
             newAccountObject = accountServices.createAccount(customerName, typeOfAccount, balance);

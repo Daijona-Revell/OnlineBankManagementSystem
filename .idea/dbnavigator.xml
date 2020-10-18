@@ -25,15 +25,15 @@
     <show-object-properties value="true" />
     <loaded-nodes>
       <connection connection-id="db53db9a-8579-4cfe-963f-db402aa3d918">
-        <schema name="OnlineBankManagement" object-types="table, view" />
-        <schema name="OnlineBankManagementSystem" object-types="column, table, function, view" />
+        <schema name="OnlineBankManagement" object-types="view, table" />
+        <schema name="OnlineBankManagementSystem" object-types="function, view, column, table" />
       </connection>
     </loaded-nodes>
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="db53db9a-8579-4cfe-963f-db402aa3d918">
       <console name="OnlineBankManagementSystem" type="STANDARD" schema="OnlineBankManagementSystem" session="Main">select * from `OnlineBankManagementSystem`.`Accounts`
-insert into `OnlineBankManagementSystem`.`Accounts`values ('1234567889', 'Munirr Sesay','Savings', 800.00);
+insert into `OnlineBankManagementSystem`.`Accounts`values ('1234567886', 'Munirr Sesay','Savings', 800.50);
 select * from `OnlineBankManagementSystem`.`Accounts`;
 select * from `OnlineBankManagementSystem`.`Accounts`;
 delete from `OnlineBankManagementSystem`.Accounts where customerName = customerName;
